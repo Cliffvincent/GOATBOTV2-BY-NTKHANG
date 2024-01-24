@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Random Quote</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+ <style>
+	h1 {
+	 text-align: center;
+	}
+	body {
+	 background-image: url("https://i.imgur.com/vsfQ0u8.gif");
+	 color: white;
+	 font-family: 'Montserrat', sans-serif;
+	 font-weight: 400;
+	}
+	.white-box {
+	 background-color:#09143C;
+	 color:  #FFFFFF;
+	 margin: 40px 18%;
+	 padding: 5% 5% 5% 10%;
+	 font-family: 'Montserrat', sans-serif;
+	 font-weight: 300;
+	}
+	.random-quote {
+	 font-size: 1.5em;
+	 text-align: center;
+	 font-weight: 500;
+	}
+	.random-author {
+	 font-size: 1.2em;
+	 text-align: right;
+	}
+	.button {
+	 /* Add your button styles here */
+	}
+ </style>
+</head>
+<body>
+
+ <h1>Random Quote</h1>
+ <div class="white-box">
+	<div class="quote">
+	 <i class="fa fa-quote-left fa-3x"></i>
+	 <p class="random-quote"><span id="text"></span></p>
+	</div>
+	<div class="random-author">- <span id="author"></span></div>
+	<div class="buttons">
+	 <a id="tweet" href="https://twitter.com/intent/tweet" title="Tweet this!" target="_blank">
+		<button class="button"><i class="fa fa-twitter"></i></button>
+	 </a>
+	 <div class="new-quote-button">
+		<button class="button" id="new-quote">New Quote</button>
+	 </div>
+	</div>
+ </div>
+
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ <script>
+	var randomQuote = "";
+	var randomAuthor = "";
+
+	function getQuote() {
+	 $.ajax({
+		url: "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?",
+		method: "GET",
+		dataType: "jsonp",
+		success: function (request) {
+		 randomQuote = request.quoteText;
+		 randomAuthor = request.quoteAuthor;
+		 $('#text').html(randomQuote);
+		 if (randomAuthor === "") {
+			randomAuthor = "Unknown";
+		 }
+		 $('#author').html(randomAuthor);
+		},
+		error: function (xhr, status, error) {
+		 $('#text').text('Not sure what happened there! Click again to generate a new quote!');
+		 $('#author').text('Click Below!');
+		}
+	 });
+	}
+
+	$(document).ready(function () {
+	 $("#new-quote").click(function () {
+		getQuote();
+	 });
+	 $("#tweet").click(function () {
+		var url = "https://twitter.com/intent/tweet?text=\"" + randomQuote + "\" -" + randomAuthor;
+		$("#tweet").attr('href', url);
+		window.open(url, '_blank');
+	 });
+	});
+ </script>
+</body>
+</html>
