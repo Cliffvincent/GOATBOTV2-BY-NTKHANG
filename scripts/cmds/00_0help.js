@@ -101,7 +101,7 @@ module.exports = {
 												let msg = "";
 												if (sortHelp == "name") {
 																const page = parseInt(args[0]) || 1;
-																const numberOfOnePage = 20;
+																const numberOfOnePage = 30;
 																for (const [name, value] of commands) {
 																				if (value.config.role > 1 && role < value.config.role)
 																								continue;
@@ -128,7 +128,7 @@ module.exports = {
 
 																const returnArray = allPage[page - 1] || [];
 																const startNumber = (page - 1) * numberOfOnePage + 1;
-																msg += (returnArray || []).reduce((text, item, index) => text += `╭────────────❍\n│ ${index + startNumber}${index + startNumber < 10 ? " " : ""}.\n├───✦\n│ ${item.data}\n╰───────────⧕\n`, '').slice(0, -1);
+																msg += (returnArray || []).reduce((text, item, index) => text += `🚀 │ ${index + startNumber}${index + startNumber < 10 ? " " : ""}.${item.data}\n`, '').slice(0, -1);
 																await message.reply(getLang("help", msg, page, totalPage, commands.size, prefix, doNotDelete));
 												}
 												else if (sortHelp == "category") {
