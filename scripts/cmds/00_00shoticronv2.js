@@ -5,12 +5,12 @@ const request = require('request');
 module.exports = {
 	config: {
 		name: "shoticronv2",
-		author: "cliff",//created by marjhun mirai file//converted by cliff to goatbot
+		author: "cliff",//created by marjhun in mirai converted by cliff to goat
 		version: "2.0.0",
 		cooldowns: 0,
 		role: 0,
 		shortDescription: {
-			en: "send random video every minutes"
+			en: "send random video"
 		},
 		longDescription: {
 			en: "randomshoti"
@@ -99,7 +99,7 @@ module.exports = {
 			return;
 		}
 
-		api.sendMessage('🚀|•Invalid command.\n\n\n🚀|• "shoticron on", "shoticron off" - to turn ON or turn OFF.\n\n\n🚀|• "shoticron setinterval <minutes/hours>" - set the timer for video\n\n\n🚀|• "shoticron interval" - check the interval\n\n\n🚀|• "shoticron status" - check the status off command', threadID);
+		api.sendMessage('🔴🟡🟢\n\n╭─❍\n➠•Invalid command.\n╰───────────⟡\n╭─❍\n➠•"shoticron on", "shoticron off" - to turn ON or turn OFF.\n╰───────────⟡\n╭─❍\n➠•"shoticron setinterval <minutes/hours>" - set the timer for video\n╰───────────⟡\n╭─❍\n➠•"shoticron interval" - check the interval\n╰───────────⟡\n╭─❍\n➠•"shoticron status" - check the status off command\n╰───────────⟡\n', threadID);
 	},
 };
 
