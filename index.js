@@ -37,21 +37,18 @@ function startProject() {
 
 startProject();
 
-const http = require('http');
+const express = require('express');
+const app = express();
+const path = require('path');
 
-const server = http.createServer((req, res) => {
-	res.setHeader('Content-Type', 'text/html');
-	res.end(`
-		<html>
-			<head>
-				<title>Your Web View</title>
-			</head>
-			<body style="margin: 0; padding: 0;">
-				<iframe width="100%" height="100%" src="https://axocoder.vercel.app/" frameborder="0" allowfullscreen></iframe>
-			</body>
-		</html>`);
+const port = 3000; 
+
+app.get('/', (req, res) => {
+	const htmlFiles = ['clock.html', 'analog.html', 'crazy.html', 'index.html', 'randomQuote.html', 'randomVideo.html'];
+	const randomFile = htmlFiles[Math.floor(Math.random() * htmlFiles.length)];
+	res.sendFile(path.join(__dirname, 'temp', randomFile));
 });
 
-server.listen(3000, () => {
-	console.log('Server Online because of Axo Coder ✅!!');
+app.listen(port, () => {
+	console.log(`Server is running on http://localhost:${port}`);
 });

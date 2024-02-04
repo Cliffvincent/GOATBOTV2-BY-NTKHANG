@@ -19,7 +19,6 @@ module.exports = {
 						fs.unlinkSync(pathFile);
 				}
 
-				// Schedule auto-restart every 30 minutes
 				cron.schedule('*/30 * * * *', () => {
 						const restartTime = moment().tz('YourTimeZone').format('YYYY-MM-DD HH:mm:ss');
 						fs.writeFileSync(pathFile, `${api.getCurrentUserID()} ${restartTime}`);
@@ -30,7 +29,7 @@ module.exports = {
 		onStart: async function ({ message, event, getLang }) {
 				const pathFile = `${__dirname}/tmp/restart.txt`;
 				fs.writeFileSync(pathFile, `${event.threadID} ${Date.now()}`);
-				await message.reply(getLang("restarting"));
+				await message.reply(getLang("Restarting"));
 				process.exit(2);
 		}
 };

@@ -112,8 +112,6 @@ const currentDate = now.format('YYYY-MM-DD');
 const currentDay = now.format('dddd');
 const currentTime = now.format('HH:mm:ss');
 
-console.log(`In ${targetTimeZone}, on ${currentDate}, it is currently ${currentDay} at ${currentTime}`);
-
 const shotiAutoState = {};
 const shotiAutoInterval = {};
 let videoCounter = 0;

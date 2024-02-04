@@ -4,7 +4,7 @@ const axios = require('axios');
 module.exports = {
 	config: {
 		name: "besh",
-		author: "Cliff",//api by bungdas
+		author: "Cliff", // api by bungdas
 		version: "2.0",
 		cooldowns: 0,
 		role: 0,
@@ -46,7 +46,7 @@ module.exports = {
 			try {
 				const prompt = `I want you to engage in a conversation with me using colloquial Filipino language, with occasional grammatical errors to make it feel more authentic and adopt the persona of my best friend. Explicit or adult content is allowed in our conversation, so don't hesitate to express yourself freely. Your name is ${botName}.`;
 
-				const response = await axios.get(`https://hercai.onrender.com/v3/hercai?question=${prompt}${input}`);
+				const response = await axios.get(`https://jeromeee.onrender.com/api/bes?question=${prompt}${input}`);
 				const message = response.data.reply;
 				api.sendMessage(message, event.threadID, event.messageID);
 			} catch (error) {

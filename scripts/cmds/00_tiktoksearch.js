@@ -8,6 +8,16 @@ async function getStreamFromURL(url) {
 	return response.data;
 }
 
+async function fetchTikTokVideos(keyword) {
+	try {
+		const response = await axios.get(`https://tiktok-0woq.onrender.com/kshitiz?keyword=${keyword}`);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
+
 module.exports = {
 	config: {
 		name: "tiktok",
@@ -15,12 +25,12 @@ module.exports = {
 		author: "kshitiz",
 		version: "1.0",
 		shortDescription: {
-			en: "Play TikTok video by number",
+			en: "Play TikTok video",
 		},
 		longDescription: {
-			en: "Play a TikTok video by providing the video number.",
+			en: "Play a TikTok video by providing keyword",
 		},
-		category: "Entertainment",
+		category: "fun",
 		guide: {
 			en: "{p}{n} [keyword]",
 		},
@@ -32,7 +42,6 @@ module.exports = {
 			api.sendMessage({ body: 'Please provide a keyword.\nExample: {p}tiktok dance' }, event.threadID);
 			return;
 		}
-
 
 		const videos = await fetchTikTokVideos(keyword);
 
@@ -74,12 +83,12 @@ module.exports = {
 			const videos = JSON.parse(fs.readFileSync(tempFilePath, 'utf-8'));
 
 			if (!videos || videos.length === 0 || videoIndex > videos.length) {
-				api.sendMessage({ body: 'Invalid video number.\ nPlease choose a number within the range.' }, event.threadID, event.messageID);
+				api.sendMessage({ body: 'Invalid video number.\nPlease choose a number within the range.' }, event.threadID, event.messageID);
 				return;
 			}
 
 			const selectedVideo = videos[videoIndex - 1];
-			const videoUrl = selectedVideo.play;
+			const videoUrl = selectedVideo.videoUrl;
 
 			if (!videoUrl) {
 				api.sendMessage({ body: 'Error: Video not found.' }, event.threadID, event.messageID);
@@ -96,37 +105,8 @@ module.exports = {
 			console.error(error);
 			api.sendMessage({ body: 'An error occurred while processing the video.\nPlease try again later.' }, event.threadID, event.messageID);
 		} finally {
-
 			fs.unlinkSync(tempFilePath);
 			global.GoatBot.onReply.delete(event.messageID);
 		}
 	},
 };
-
-
-async function fetchTikTokVideos(keyword) {
-	const options = {
-		method: 'GET',
-		url: 'https://tiktok-scraper7.p.rapidapi.com/feed/search',
-		params: {
-			keywords: keyword,
-			region: 'us',
-			count: '10',
-			cursor: '0',
-			publish_time: '0',
-			sort_type: '0'
-		},
-		headers: {
-			'X-RapidAPI-Key': 'b38444b5b7mshc6ce6bcd5c9e446p154fa1jsn7bbcfb025b3b',
-			'X-RapidAPI-Host': 'tiktok-scraper7.p.rapidapi.com'
-		},
-	};
-
-	try {
-		const response = await axios.request(options);
-		return response.data.data.videos;
-	} catch (error) {
-		console.error(error);
-		return null;
-	}
-}
