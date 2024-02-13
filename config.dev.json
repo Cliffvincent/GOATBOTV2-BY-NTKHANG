@@ -17,7 +17,7 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "100053549552408",
+    "",
     ""
   ],
   "whiteListMode": {
@@ -26,8 +26,8 @@
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
   "nickNameBot": "Yazkybot",
-  "ownerlink": "https://www.facebook.com/swordigo.swordslush",
-  "prefix": "&",
+  "ownerlink": "https://www.facebook.com/raoult.drogba",
+  "prefix": "#",
   "database": {
     "type": "sqlite",
     "uriMongodb": "",
