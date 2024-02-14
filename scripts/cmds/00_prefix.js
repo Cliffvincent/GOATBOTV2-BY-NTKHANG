@@ -15,22 +15,13 @@ module.exports = {
  if (event.body && event.body.toLowerCase() === "prefix") {
  return message.reply({
  body: `
-Yo, my prefix is [ 𓆩 & 𓆪 ]\n
-━━━━━━━━━━━━━━━━━━━━━━━━━
-██╗░░░██╗░█████╗░███████╗
-╚██╗░██╔╝██╔══██╗╚════██║
-░╚████╔╝░███████║░░███╔═╝
-░░╚██╔╝░░██╔══██║██╔══╝░░
-░░░██║░░░██║░░██║███████╗
-░░░╚═╝░░░╚═╝░░╚═╝╚══════╝
-━━━━━━━━━━━━━━━━━━━━━━━━━
-
+Yo, my prefix is [ 𓆩 ✓ 𓆪 ]\n
 𝗦𝗢𝗠𝗘 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 𝗧𝗛𝗔𝗧 𝗠𝗔𝗬 𝗛𝗘𝗟𝗣 𝗬𝗢𝗨:
 ➥ &help [number of page] -> see commands
 ➥ &sim [message] -> talk to bot
 ➥ &callad [message] -> report any problem encountered
 ➥ &help [command] -> information and usage of command\n\nHave fun using it enjoy!❤️\nBot Developer: https://www.facebook.com/swordigo.swordslush`,
- attachment: await global.utils.getStreamFromURL("https://i.imgur.com/5OgGEyv.gif")
+ attachment: await global.utils.getStreamFromURL("https://i.imgur.com/jWoZtjO.gif")
  });
  }
  }

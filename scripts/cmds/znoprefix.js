@@ -44,9 +44,9 @@ case "prefix2":
           });
           await api.setMessageReaction("🪐", event.messageID, event.threadID, api);
   case "owner":
-          message.reply({
-            body: "📜 𝙊𝙬𝙣𝙚𝙧 𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣:\n𝖭𝖺𝗆𝖾:Cliff Vincent \n𝖦𝖾𝗇𝖽𝖾𝗋:Male\n𝖠𝗀𝖾: Unknown\nFb:https://www.facebook.com/swordigo.swordslush",
-            attachment: fs.createReadStream("scripts/cmds/noprefix/cliff.mp4"),
+message.reply({
+body: "———»ADMIN BOT«———\n❯ Bot Name: yazky\n❯ Bot Owner: CLIFF VINCENT\n❯ Age: 18 \n❯ Gender: Male\n❯ Facebook: https://www.facebook.com/swordigo.swordslush\n❯ Total Group: 12\n❯ Total Users: 862\n❯ Bot Prefix: #\n❯ Today is: Monday,February 5, 2024 3:33 PM\n❯ Thanks for using YAZKY BOT",
+            attachment: fs.createReadStream("scripts/cmds/noprefix/goodnight.gif"),
           });
           await api.setMessageReaction("😙", event.messageID, event.threadID, api);
    default:
@@ -55,3 +55,4 @@ case "prefix2":
     }
   }
 };
+

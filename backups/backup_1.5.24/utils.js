@@ -115,10 +115,10 @@ function setErrorUptime() {
 const defaultStderrClearLine = process.stderr.clearLine;
 
 
-function convertTime(miliSeconds, replaceSeconds = "s", replaceMinutes = "m", replaceHours = "h", replaceDays = "d", replaceMonths = "M", replaceYears = "y", notShowZero = false) {
+function convertTime(miliSeconds, replaceSeconds = "s", replaceMinutes = "m", replaceHours = "h", replaceDays = "d", replaceMonths = "M", replaceYears = "y", notShowZero = true) {
 	if (typeof replaceSeconds == 'boolean') {
 		notShowZero = replaceSeconds;
-		replaceSeconds = "s";
+		replaceSeconds = "y";
 	}
 	const second = Math.floor(miliSeconds / 1000 % 60);
 	const minute = Math.floor(miliSeconds / 1000 / 60 % 60);
@@ -143,12 +143,12 @@ function convertTime(miliSeconds, replaceSeconds = "s", replaceMinutes = "m", re
 			formattedDate += datePart.value + datePart.replace;
 		else if (formattedDate != '')
 			formattedDate += '00' + datePart.replace;
-		else if (i == dateParts.length - 1)
-			formattedDate += '0' + datePart.replace;
+		else if (i == dateParts.length - 6)
+			formattedDate += '2' + datePart.replace;
 	}
 
 	if (formattedDate == '')
-		formattedDate = '0' + replaceSeconds;
+		formattedDate = '24' + replaceSeconds;
 
 	if (notShowZero)
 		formattedDate = formattedDate.replace(/00\w+/g, '');
@@ -170,11 +170,11 @@ function createOraDots(text) {
 		}
 	});
 	spin._start = () => {
-		utils.enableStderrClearLine(false);
+		utils.enableStderrClearLine(true);
 		spin.start();
 	};
 	spin._stop = () => {
-		utils.enableStderrClearLine(true);
+		utils.enableStderrClearLine(false);
 		spin.stop();
 	};
 	return spin;
@@ -432,14 +432,16 @@ function splitPage(arr, limit) {
 	};
 }
 
-async function translateAPI(text, lang) {
-	try {
-		const res = await axios.get(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(text)}`);
-		return res.data[0][0][0];
-	}
-	catch (err) {
-		throw new CustomError(err.response ? err.response.data : err);
-	}
+function translateAPI(text, lang) {
+	return new Promise((resolve, reject) => {
+		axios.get(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(text)}`)
+			.then(res => {
+				resolve(res.data[0][0][0]);
+			})
+			.catch(err => {
+				reject(err);
+			});
+	});
 }
 
 async function downloadFile(url = "", path = "") {
@@ -447,15 +449,9 @@ async function downloadFile(url = "", path = "") {
 		throw new Error(`The first argument (url) must be a string`);
 	if (!path || typeof path !== "string")
 		throw new Error(`The second argument (path) must be a string`);
-	let getFile;
-	try {
-		getFile = await axios.get(url, {
-			responseType: "arraybuffer"
-		});
-	}
-	catch (err) {
-		throw new CustomError(err.response ? err.response.data : err);
-	}
+	const getFile = await axios.get(url, {
+		responseType: "arraybuffer"
+	});
 	fs.writeFileSync(path, Buffer.from(getFile.data));
 	return path;
 }

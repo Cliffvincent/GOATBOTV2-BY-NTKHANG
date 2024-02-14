@@ -159,15 +159,12 @@ const watchAndReloadConfig = (dir, type, prop, logName) => {
 		if (eventType === type) {
 			const oldConfig = global.GoatBot[prop];
 
-			// wait 200ms to reload config
 			setTimeout(() => {
 				try {
-					// if file change first time (when start bot, maybe you know it's called when start bot?) => not reload
 					if (isFirstModified) {
 						isFirstModified = false;
 						return;
 					}
-					// if file not change => not reload
 					if (lastModified === fs.statSync(dir).mtimeMs) {
 						return;
 					}
@@ -277,7 +274,7 @@ if (config.autoRestart) {
 	if (compareVersion(version, currentVersion) === 1)
 		utils.log.master("NEW VERSION", getText("Goat", "newVersionDetected", colors.gray(currentVersion), colors.hex("#eb6a07", version)));
 	// —————————— CHECK FOLDER GOOGLE DRIVE —————————— //
-	const parentIdGoogleDrive = await utils.drive.checkAndCreateParentFolder("GoatBot");
+	const parentIdGoogleDrive = await utils.drive.checkAndCreateParentFolder("Goatbot");
 	utils.drive.parentID = parentIdGoogleDrive;
 	// ———————————————————— LOGIN ———————————————————— //
 	require(`./bot/login/login${NODE_ENV === 'development' ? '.dev.js' : '.js'}`);

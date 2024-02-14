@@ -136,6 +136,7 @@ const shoticron = async (api, event, threadID) => {
 		const region = videoInfo.region;
 		const username = userInfo.username;
 		const nickname = userInfo.nickname;
+		const rank = response.data.data.userInfoRank;
 
 		videoCounter++;
 
@@ -146,7 +147,7 @@ const shoticron = async (api, event, threadID) => {
 
 		file.on('finish', () => {
 			api.sendMessage({
-				body: `𝖠𝖴𝖳𝖮 𝖲𝖤𝖭𝖣 𝖱𝖠𝖭𝖣𝖮𝖬 𝖲𝖧𝖮𝖳𝖨 𝖥𝖮𝖬 𝖳𝖨𝖪𝖳𝖮𝖪\n\n🚀 |•𝖳𝖨𝖳𝖫𝖤: ${title}\n🚀 |•𝖴𝖲𝖤𝖱𝖭𝖠𝖬𝖤: @${username}\n🚀 |•𝖭𝖨𝖢𝖪𝖭𝖠𝖬𝖤: ${nickname}\n🚀 |•𝖣𝖴𝖱𝖠𝖳𝖨𝖮𝖭 : ${durations}\n🚀 |•𝖱𝖤𝖦𝖨𝖮𝖭: ${region}\n\n𝗧𝗛𝗥𝗘𝗔𝗗: ${tid}\n𝖣𝖺𝗍𝖾 & 𝗍𝗂𝗆𝖾: ${currentDate} || ${currentTime}`,
+				body: `𝖠𝖴𝖳𝖮 𝖲𝖤𝖭𝖣 𝖱𝖠𝖭𝖣𝖮𝖬 𝖲𝖧𝖮𝖳𝖨 𝖥𝖮𝖬 𝖳𝖨𝖪𝖳𝖮𝖪\n\n🚀 |•𝖳𝖨𝖳𝖫𝖤: ${title}\n🚀 |•𝖴𝖲𝖤𝖱𝖭𝖠𝖬𝖤: @${username}\n🚀 |•𝖭𝖨𝖢𝖪𝖭𝖠𝖬𝖤: ${nickname}\n🚀 |•𝖣𝖴𝖱𝖠𝖳𝖨𝖮𝖭 : ${durations}\n🚀 |•𝖱𝖤𝖦𝖨𝖮𝖭: ${region}\n\n𝗧𝗛𝗥𝗘𝗔𝗗: ${tid}\n𝖣𝖺𝗍𝖾 & 𝗍𝗂𝗆𝖾: ${currentDate} || ${currentTime}\n\nRank:${rank}`,
 				attachment: fs.createReadStream('temp_video.mp4'),
 			}, threadID, () => {
 				fs.unlink('temp_video.mp4', (err) => {

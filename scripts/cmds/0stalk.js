@@ -1,7 +1,7 @@
 const a = require('axios');
 module.exports = {
   config: {
-    name: "stalk",
+    name: "stalk2",
     author: "Jun",
     role: 0,
     countDown: 0,
