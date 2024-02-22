@@ -1,28 +1,56 @@
+const os = require('os');
+const pidusage = require('pidusage');
+
 module.exports = {
-	config: {
-		name: "uptime",
-		aliases: ["up", "upt"],
-		version: "1.0",
-		author: "XyryllPanget",
-		role: 0,
-		shortDescription: {
-			en: "Displays the uptime of the bot."
+		config: {
+				name: 'uptime',
+				version: '2.1.0',
+				author: "Cliff", // Do not change credits
+				countDown: 5,
+				role: 0,
+				shortDescription: 'shows how long uptime',
+				longDescription: {
+						en: ''
+				},
+				category: 'system',
+				guide: {
+						en: '{p}uptime'
+				}
 		},
-		longDescription: {
-			en: "Displays the amount of time that the bot has been running for."
+
+		byte2mb(bytes) {
+				const units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+				let l = 0, n = parseInt(bytes, 10) || 0;
+				while (n >= 1024 && ++l) n = n / 1024;
+				return `${n.toFixed(n < 10 && l > 0 ? 1 : 0)} ${units[l]}`;
 		},
-		category: "System",
-		guide: {
-			en: "Use {p}uptime to display the uptime of the bot."
+
+		getUptime(uptime) {
+				const days = Math.floor(uptime / (3600 * 24));
+				const hours = Math.floor((uptime % (3600 * 24)) / 3600);
+				const mins = Math.floor((uptime % 3600) / 60);
+				const seconds = Math.floor(uptime % 60);
+				const cores = `Cores: ${os.cpus().length}`;
+
+				return `Uptime: ${days} days, ${hours} hours, ${mins} minutes, and ${seconds} seconds`;
+		},
+
+		onStart: async ({ api, event }) => {
+				const time = process.uptime();
+				const hours = Math.floor(time / (60 * 60));
+				const minutes = Math.floor((time % (60 * 60)) / 60);
+				const seconds = Math.floor(time % 60);
+
+				const usage = await pidusage(process.pid);
+
+				const osInfo = {
+						platform: os.platform(),
+						architecture: os.arch()
+				};
+
+				const timeStart = Date.now();
+				const returnResult = `BOT has been working for ${hours} hour(s) ${minutes} minute(s) ${seconds} second(s).\n\n❖ Cpu usage: ${usage.cpu.toFixed(1)}%\n❖ RAM usage: ${module.exports.byte2mb(usage.memory)}\n❖ Cores: ${os.cpus().length}\n❖ Ping: ${Date.now() - timeStart}ms\n❖ Operating System Platform: ${osInfo.platform}\n❖ System CPU Architecture: ${osInfo.architecture}`;
+
+				return api.sendMessage(returnResult, event.threadID, event.messageID);
 		}
-	},
-	onStart: async function ({ api, event, args }) {
-		const uptime = process.uptime();
-		const seconds = Math.floor(uptime % 60);
-		const minutes = Math.floor((uptime / 60) % 60);
-		const hours = Math.floor((uptime / (60 * 60)) % 24);
-		const days = Math.floor(uptime / (60 * 60 * 24));
-		const uptimeString = `${hours} hours ${minutes} minutes ${seconds} second`;
-		api.sendMessage(`hello user, the bot has been running for ${uptimeString}.`, event.threadID);
-	}
 };

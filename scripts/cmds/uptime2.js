@@ -1,41 +1,60 @@
-module.exports = {
-	config: {
-		name: "uptime2",
-		aliases: ["up2"],
-		role: 0,
-		shortDescription: {
-			en: "Show server uptime",
-			tl: "Ipakita ang uptime ng server",
-		},
-		longDescription: {
-			en: "Shows the duration for which the server has been running",
-			tl: "Ipapakita ang tagal na gumagana ang server",
-		},
-		category: "goatBot",
-		guide: {
-			en: "{p}uptime",
-			tl: "{p}uptime",
-		},
-	},
+const os = require('os');
+const pidusage = require('pidusage');
+const { performance } = require('perf_hooks');
 
-	onStart: async function ({ api, message, threadsData }) {
-		const os = require("os");
-		const uptime = os.uptime();
+function byte2mb(bytes) {
+		const units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+		let l = 0, n = parseInt(bytes, 10) || 0;
+		while (n >= 1024 && ++l) n = n / 1024;
+		return `${n.toFixed(n < 10 && l > 0 ? 1 : 0)} ${units[l]}`;
+}
 
+function getUptime(uptime) {
 		const days = Math.floor(uptime / (3600 * 24));
 		const hours = Math.floor((uptime % (3600 * 24)) / 3600);
 		const mins = Math.floor((uptime % 3600) / 60);
 		const seconds = Math.floor(uptime % 60);
-
-		const system = `OS: ${os.platform()} ${os.release()}`;
 		const cores = `Cores: ${os.cpus().length}`;
-		const arch = `Architecture: ${os.arch()}`;
-		const totalMemory = `Total Memory: ${Math.round(os.totalmem() / (1024 * 1024 * 1024))} GB`;
-		const freeMemory = `Free Memory: ${Math.round(os.freemem() / (1024 * 1024 * 1024))} GB`;
-		const uptimeString = `Uptime: ${days} days, ${hours} hours, ${mins} minutes, and ${seconds} seconds`;
 
-		const response = `🕒 ${uptimeString}\n📡 ${system}\n🛡 ${cores}\n⚔ No AI Status\n📈 Total Users: ${threadsData.size}\n📉 Total Threads: ${threadsData.size}\n⚖ AI Usage: 0.0\n📊 RAM Usage: ${Math.round(process.memoryUsage().rss / (1024 * 1024))} MB\n💰 Total(RAM): ${Math.round(os.totalmem() / (1024 * 1024 * 1024))} GB\n💸 Current(RAM): ${Math.round(os.freemem() / (1024 * 1024 * 1024))} GB\n🛫 Ping: 15 ms\n🕰 Uptime(Seconds): ${Math.floor(process.uptime())}`;
+		return `Uptime: ${days} days, ${hours} hours, ${mins} minutes, and ${seconds} seconds`;
+}
 
-		message.reply(response);
+module.exports = {
+	config: {
+		name: "up",
+		aliase: ["up", "upt"],
+		version: "1.0",
+		author: "Cliff",
+		role: 0,
+		countDown: 0,
+		shortDescription: {
+			en: "Displays the uptime of the bot."
+		},
+		longDescription: {
+			en: "Displays the amount of time that the bot has been running for."
+		},
+		category: "System",
+		guide: {
+			en: "Use {p}uptime to display the uptime of the bot."
+		}
 	},
+	onStart: async function ({ api, event }) {
+		const time = process.uptime();
+		const hours = Math.floor(time / (60 * 60));
+		const minutes = Math.floor((time % (60 * 60)) / 60);
+		const seconds = Math.floor(time % 60);
+
+		const usage = await pidusage(process.pid);
+
+
+		const osInfo = {
+			platform: os.platform(),
+			architecture: os.arch()
+		};
+
+		const timeStart = Date.now();
+		const returnResult = `BOT has been working for ${hours} hour(s) ${minutes} minute(s) ${seconds} second(s).\n\n❖ Cpu usage: ${usage.cpu.toFixed(1)}%\n❖ RAM usage: ${byte2mb(usage.memory)}\n❖ Cores: ${os.cpus().length}\n❖ Ping: ${Date.now() - timeStart}ms\n❖ Operating System Platform: ${osInfo.platform}\n❖ System CPU Architecture: ${osInfo.architecture}`;
+
+		return api.sendMessage(returnResult, event.threadID, event.messageID);
+	}
 };

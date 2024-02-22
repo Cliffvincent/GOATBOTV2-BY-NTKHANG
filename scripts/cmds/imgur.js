@@ -1,23 +1,37 @@
-let axios = require("axios"); 
-module.exports = {
-  config: {
-    name: "imgur",
-    aliases: [`imagegur`],
-    version: "1.0",
-    author: "otiney",
-    countDown: 0,
-    role: 0,
-    shortDescription: "upload any images in imgur server..",
-    longDescription: "upload any images in imgur server..",
-    category: "utility",
-    guide: "{pn} reply or add link of image"
-  },
+const axios = require('axios');
 
-  onStart: async function ({ api, event }) {
-    let linkanh = event.messageReply.attachments[0].url || args.join(" ");
-    if(!linkanh) return api.sendMessage('Please reply or enter the link 1 image!!!', event.threadID, event.messageID)
-    let res = await axios.get(`https://API-Web.miraiofficials123.repl.co/imgur?link=${encodeURIComponent(linkanh)}&apikey=18102004`);
-    let img = res.data.data;
-  return api.sendMessage(`${img}`, event.threadID, event.messageID)
-  }
+module.exports = {
+		config: {
+				name: "imgur",
+				version: "1.0.0",
+				role: 0,
+				author: "eugene",
+				shortDescription: "imgur upload",
+				countDown: 0,
+				category: "imgur",
+				guide: {
+						en: '[reply to image]'
+				}
+		},
+
+		onStart: async ({ api, event }) => {
+				let link2;
+
+				if (event.type === "message_reply" && event.messageReply.attachments.length > 0) {
+						link2 = event.messageReply.attachments[0].url;
+				} else if (event.attachments.length > 0) {
+						link2 = event.attachments[0].url;
+				} else {
+						return api.sendMessage('No attachment detected. Please reply to an image.', event.threadID, event.messageID);
+				}
+
+				try {
+						const res = await axios.get(`http://fi3.bot-hosting.net:20284/imgur?link=${encodeURIComponent(link2)}`);
+						const link = res.data.uploaded.image;
+						return api.sendMessage(`Here is the Imgur link for the image you provided:\n\n${link}`, event.threadID, event.messageID);
+				} catch (error) {
+						console.error("Error uploading image to Imgur:", error);
+						return api.sendMessage("An error occurred while uploading the image to Imgur.", event.threadID, event.messageID);
+				}
+		}
 };

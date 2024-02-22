@@ -41,7 +41,7 @@ module.exports = {
 		}
 
 		try {
-			const resp = await axios.get(`http://eu4.diresnode.com:3588/stalk?uid=${id}`);
+			const resp = await axios.get(`https://useless-apis.replit.app/stalk?uid=${id}`);
 			var name = resp.data.name;
 			var link_profile = resp.data.link;
 			var uid = resp.data.id;
