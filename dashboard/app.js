@@ -291,9 +291,9 @@ module.exports = async (api) => {
 			return res.status(500).send(getText("app", "serverError"));
 	});
 
-	const PORT = config.dashBoard.port || config.serverUptime.port || 3001;
+	const PORT = config.dashBoard.port || config.serverUptime.port || 8080;
 	let dashBoardUrl = `https://${process.env.REPL_OWNER
-		? `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}04da64f8-d6d3-4725-ae79-aec2fc9d6bbe-00-18urwfurlu86d.sisko.replit.dev/`
+		? `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}${process.env.DevURL}.sisko.replit.dev/`
 		: process.env.API_SERVER_EXTERNAL == "https://api.glitch.com"
 			? `${process.env.PROJECT_DOMAIN}.glitch.me`
 			: `localhost:${PORT}`}`;

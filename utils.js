@@ -118,7 +118,7 @@ const defaultStderrClearLine = process.stderr.clearLine;
 function convertTime(miliSeconds, replaceSeconds = "s", replaceMinutes = "m", replaceHours = "h", replaceDays = "d", replaceMonths = "M", replaceYears = "y", notShowZero = false) {
 	if (typeof replaceSeconds == 'boolean') {
 		notShowZero = replaceSeconds;
-		replaceSeconds = "s";
+		replaceSeconds = "h";
 	}
 	const second = Math.floor(miliSeconds / 1000 % 60);
 	const minute = Math.floor(miliSeconds / 1000 / 60 % 60);

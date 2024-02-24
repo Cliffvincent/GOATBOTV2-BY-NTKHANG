@@ -1,76 +1,10 @@
-<img src="https://i.ibb.co/r5W1w9C/65a2deab8394d754214210.gif" alt="banner">
-<h1 align="center">
-  <img src="./dashboard/images/logo-non-bg.png" width="25px"> GoatBot-V2 - Bot Chat Messenger
-</h1>
-
+<img src="https://i.ibb.co/RQ28H2p/banner.png" alt="banner">
+<h1 align="center"><img src="./dashboard/images/logo-non-bg.png" width="22px"> Goat Bot - Bot Chat Messenger</h1>
 <p align="center">
-	<a href="https://nodejs.org/dist/v16.20.0">
-		<img alt="size" src="https://img.shields.io/badge/Nodejs%20Support-16.x-brightgreen.svg?style=flat-square.png" alt="Nodejs Support v16.x">
-	</a>
-  <img alt="size" src="https://img.shields.io/github/repo-size/ntkhang03/Goat-Bot-V2.svg?style=flat-square&label=size.png">
-  <img alt="code-version" src="https://img.shields.io/badge/dynamic/json?color=brightgreen&label=code%20version&prefix=v&query=%24.version&url=https://github.com/ntkhang03/Goat-Bot-V2/raw/main/package.json&style=flat-square.png">
-  <img alt="visitors" src="https://visitor-badge.laobi.icu/badge?style=flat-square&page_id=ntkhang3.Goat-Bot-V2.png">
-		<img alt="size"
-src="./dashboard/images/vs.svg">
-  <img alt="size" src="https://img.shields.io/badge/license-MIT-green?style=flat-square&color=brightgreen.png">
-		<img alt="size"
-src="./dashboard/images/youtube.svg">
-  <img alt="size"
-src="./dashboard/images/discord.svg">
-	<img alt="size"
-src="./dashboard/images/docs.svg">
-	<img alt="size"
-src="./dashboard/images/sponsor.svg">
-	<img alt="size"
-src="./dashboard/images/github.svg">
-  <img alt="size"
-src="./dashboard/images/an.svg">
-	<img alt="size"
-src="./dashboard/images/facebook.svg">
-	<img alt="size"
-src="./dashboard/images/hello.svg">
-		<img alt="size"
-src="./dashboard/images/tiktok.svg">
-	<img alt="size"
-src="./dashboard/images/vscode.svg">
-		<img alt="size"
-src="./dashboard/images/gmail.svg">
-		<img alt="size"
-src="./dashboard/images/insta.svg">
-	<img alt="size"
-src="./dashboard/images/java.svg">
-	<img alt="size"
-	src="./dashboard/images/html.svg">
-		<img alt="size"
-src="./dashboard/images/css.svg">
-		<img alt="size"
-src="./dashboard/images/php.svg">
-	<img alt="size"
-src="./dashboard/images/sql.svg">
-		<img src="./dashboard/images/cliff.png" width="40px">
-<img src="./dashboard/images/yazky.png"
-width="37px">
-	<img alt="size"
-src="./dashboard/images/sh.svg">
-		<img alt="size"
-src="./dashboard/images/st.svg">
+<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="500">
+<br><br>
+<img src="https://user-images.githubusercontent.com/74038190/219925470-37670a3b-c3e2-4af7-b468-673c6dd99d16.png" width="200" />
 
-</p>
-  
-<h1 align="center"> Starter Guide: </h1>
-<details>
-<summary align="center">BIG CREDITS TO NTKHANG 🇻🇳🤝🇵🇭</summary>
-	
-```js
-'░██████╗░░█████╗░░█████╗░████████╗
-'██╔════╝░██╔══██╗██╔══██╗╚══██╔══╝
-'██║░░██╗░██║░░██║███████║░░░██║░░░
- ██║░░╚██╗██║░░██║██╔══██║░░░██║░░░
- ╚██████╔╝╚█████╔╝██║░░██║░░░██║░░░
- ░╚═════╝░░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░
-'𝙄 𝙝𝙤𝙥𝙚 𝙮𝙤𝙪 𝙙𝙤𝙣𝙩 𝙢𝙖𝙠𝙚 𝙖𝙨 𝙤𝙬𝙣 𝙩𝙝𝙞𝙨 𝙛𝙞𝙡𝙚𝙨,𝙞𝙢 𝙤𝙣𝙡𝙮 𝙢𝙤𝙙𝙞𝙛𝙞𝙚𝙧 𝙖𝙣𝙙 𝙩𝙝𝙚 𝙤𝙬𝙣𝙚𝙧 𝙤𝙛 𝙩𝙝𝙞𝙨 🇬​​​​​🇴​​​​​🇦​​​​​🇹​​​​​🇧​​​​​🇴​​​​​🇹​​​​​ 𝙞𝙨 𝙉𝙩𝙠𝙝𝙖𝙣𝙜'
-```
-</details>
 
 - [📝 **Note**](#-note)
 - [🚧 **Requirement**](#-requirement)
@@ -101,7 +35,7 @@ src="./dashboard/images/st.svg">
 Tutorial has been uploaded on YouTube
 - For mobile phone: https://www.youtube.com/watch?v=grVeZ76HlgA
 - For vps/windows: https://www.youtube.com/watch?v=uCbSYNQNEwY
-  
+
 Summary instructions:
 - See [here](https://github.com/ntkhang03/Goat-Bot-V2/blob/main/STEP_INSTALL.md)
 
@@ -186,43 +120,43 @@ If you have major coding issues with this bot, please join and ask for help.
 - ### Bot
 <details>
 	<summary>
- 		Rank system
+		Rank system
 	</summary>
 
-  - Rank card:
-  <p><img src="https://i.ibb.co/d0JDJxF/rank.png" width="399px"></p>
+	- Rank card:
+	<p><img src="https://i.ibb.co/d0JDJxF/rank.png" width="399px"></p>
 
-  - Rankup notification:
-  <p><img src="https://i.ibb.co/WgZzthH/rankup.png" width="399px"></p>
+	- Rankup notification:
+	<p><img src="https://i.ibb.co/WgZzthH/rankup.png" width="399px"></p>
 
-  - Custom rank card:
-  <p><img src="https://i.ibb.co/hLTThLW/customrankcard.png" width="399px"></p>
+	- Custom rank card:
+	<p><img src="https://i.ibb.co/hLTThLW/customrankcard.png" width="399px"></p>
 </details>
 
 <details>
 	<summary>
- 		Weather
+		Weather
 	</summary>
 	<p><img src="https://i.ibb.co/2FwWVLv/weather.png" width="399px"></p>
 </details>
 
 <details>
 	<summary>
- 		Auto send notification when have user join or leave box chat (you can custom message)
+		Auto send notification when have user join or leave box chat (you can custom message)
 	</summary>
 	<p><img src="https://i.ibb.co/Jsb5Jxf/wcgb.png" width="399px"></p>
 </details>
 
 <details>
 	<summary>
- 		Openjourney
+		Openjourney
 	</summary>
 	<p><img src="https://i.ibb.co/XJfwj1X/Screenshot-2023-05-09-22-43-58-630-com-facebook-orca.jpg" width="399px"></p>
 </details>
 
 <details>
 	<summary>
- 		GPT
+		GPT
 	</summary>
 	<p><img src="https://i.ibb.co/D4wRbM3/Screenshot-2023-05-09-22-47-48-037-com-facebook-orca.jpg" width="399px"></p>
 	<p><img src="https://i.ibb.co/z8HqPkH/Screenshot-2023-05-09-22-47-53-737-com-facebook-orca.jpg" width="399px"></p>
@@ -234,7 +168,7 @@ If you have major coding issues with this bot, please join and ask for help.
 - ### Dashboard
 <details>
 	<summary>
- 		Home:
+		Home:
 	</summary>
 	<p><img src="https://i.ibb.co/HV91MbH/image.png" width="399px"></p>
 	<p><img src="https://i.ibb.co/DRr97R9/image.png" width="399px"></p>
@@ -242,14 +176,14 @@ If you have major coding issues with this bot, please join and ask for help.
 
 <details>
 	<summary>
- 		Stats:
+		Stats:
 	</summary>
 	<p><img src="https://i.ibb.co/NyCMYxS/image.png" width="399px"></p>
 </details>
 
 <details>
 	<summary>
- 		Login/Register:
+		Login/Register:
 	</summary>
 	<p><img src="https://i.ibb.co/2Z2L6p4/image.png" width="399px"></p>
 	<p><img src="https://i.ibb.co/KF1ftGw/image.png" width="399px"></p>
@@ -257,21 +191,21 @@ If you have major coding issues with this bot, please join and ask for help.
 
 <details>
 	<summary>
- 		Dashboard Thread:
+		Dashboard Thread:
 	</summary>
 	<p><img src="https://i.ibb.co/tHNqtyy/image.png" width="399px"></p>
 </details>
 
 <details>
 	<summary>
- 		Custom on/off:
+		Custom on/off:
 	</summary>
 	<p><img src="https://i.ibb.co/McDRhmX/image.png" width="399px"></p>
 </details>
 
 <details>
 	<summary>
- 		Custom welcome message (similar with leave, rankup (coming soon), custom command (coming soon))
+		Custom welcome message (similar with leave, rankup (coming soon), custom command (coming soon))
 	</summary>
 	<p><img src="https://i.ibb.co/6ZrQqc1/image.png" width="399px"></p>
 	<p><img src="https://i.ibb.co/G53JsXm/image.png" width="399px"></p>
@@ -297,6 +231,3 @@ If you have major coding issues with this bot, please join and ask for help.
 - Don't claim my source code as your own
 - Do not monetize my source code (such as: buy and sell commands, buy and sell bots, call for donations, etc.)
 - Don't remove/edit my credits (author name) in my source code
-
-
-

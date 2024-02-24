@@ -1,5 +1,6 @@
 const axios = require("axios");
 const fs = require("fs");
+const cookie = 'g.a000gggofsT-eH4KIvq359t2PSkOCpfqw50IE922AbLD-vn8M1oZ5clc36fJT8D_mWe8eXtQEwACgYKAZgSAQASFQHGX2Mix0E7IgxI48h5sQo6YgKwjBoVAUF8yKpG8zgsWay_nGUmv-fyG61J0076';
 
 module.exports = {
 	config: {
@@ -8,7 +9,7 @@ module.exports = {
 		author: "rehat--",
 		countDown: 5,
 		role: 0,
-		longDescription: { en: "Artificial Intelligence Google Bard" },
+		longDescription: { en: "Artificial Intelligence Google Gemini" },
 		guide: { en: "{pn} <query>" },
 		category: "ai",
 	},
@@ -27,21 +28,20 @@ module.exports = {
 
 		if (prompt.toLowerCase() === "clear") {
 			this.clearHistory();
-			const clear = await axios.get(`https://project-bard.onrender.com/api/bard?query=clear&uid=${uid}`);
+			const clear = await axios.get(`https://project-gemini-daac55836bf7.herokuapp.com/api/gemini?query=clear&uid=${uid}&cookie=${cookie}`);
 			message.reply(clear.data.message);
 			return;
 		}
 
-		if (event.type === "message_reply" && event.messageReply.attachments && event.messageReply.attachments[0].type === "photo") {
-			const photo = encodeURIComponent(event.messageReply.attachments[0].url);
-			const query = args.join(" ");
-			const url = `https://turtle-apis.onrender.com/api/gemini/img?prompt=${encodeURIComponent(query)}&url=${photo}`;
-			const response = await axios.get(url);
-			message.reply(response.data.answer);
-			return;
+		let apiUrl = `https://project-gemini-daac55836bf7.herokuapp.com/api/gemini?query=${encodeURIComponent(prompt)}&uid=${uid}&cookie=${cookie}`;
+
+		if (event.type === "message_reply") {
+			const imageUrl = event.messageReply.attachments[0]?.url;
+			if (imageUrl) {
+				apiUrl += `&attachment=${encodeURIComponent(imageUrl)}`;
+			}
 		}
 
-		const apiUrl = `https://project-bard.onrender.com/api/bard?query=${encodeURIComponent(prompt)}&uid=${uid}`;
 		try {
 			const response = await axios.get(apiUrl);
 			const result = response.data;
@@ -100,7 +100,7 @@ module.exports = {
 		if (event.senderID !== author) return;
 
 		try {
-			const apiUrl = `https://project-bard.onrender.com/api/bard?query=${encodeURIComponent(prompt)}&uid=${author}`;
+			const apiUrl = `https://project-gemini-daac55836bf7.herokuapp.com/api/gemini?query=${encodeURIComponent(prompt)}&uid=${author}&cookie=${cookie}`;
 			const response = await axios.get(apiUrl);
 
 			let content = response.data.message;

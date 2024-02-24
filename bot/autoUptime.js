@@ -9,7 +9,7 @@ if (!config.autoUptime.enable)
 const PORT = config.dashBoard?.port || (!isNaN(config.serverUptime.port) && config.serverUptime.port) || 3000;
 
 let myUrl = config.autoUptime.url || `https://${process.env.REPL_OWNER
-	? `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}a3eef81f-1c72-43a8-9fe3-65417c536f36-00-7z6e1orybd7o.sisco.replit.dev/`
+	? `${process.env.REPL_SLUG}.${process.env.REPL_OWNER}${...}.replit.dev`
 	: process.env.API_SERVER_EXTERNAL == "https://api.glitch.com"
 		? `${process.env.PROJECT_DOMAIN}.glitch.me`
 		: `localhost:${PORT}`}`;

@@ -1,46 +1,87 @@
-const axios = require('axios');
-
-module.exports = {
-	config: {
-		name: "llma",
-		author: "cliff",//credits sa may ari ng api
-		version: "1.0.3",
-		countDown: 5,
-		role: 0,
-		category: "member",
-		shortDescription: {
-			en: "get a random image of a cat"
-		}
-	},
-
-	onStart: async function ({ api, event, args }) {
-		try {
-			const { messageID, messageReply } = event;
-			let prompt = args.join(' ');
-
-			if (messageReply) {
-				const repliedMessage = messageReply.body;
-				prompt = `${repliedMessage} ${prompt}`;
-			}
-
-			if (!prompt) {
-				return api.sendMessage('Please provide a prompt to generate a text response.\n\nllama {prompt}\nExample: llama What is kardashev scale?\n', event.threadID, event.messageID);
-			}
-
-			const llama_api = `https://llama.aliestercrowley.com/api?prompt=${encodeURIComponent(prompt)}`;
-
-			const response = await axios.get(llama_api);
-
-			if (response.data && response.data.response) {
-				const generatedText = response.data.response;
-				api.sendMessage({ body: generatedText, attachment: null }, event.threadID, messageID);
-			} else {
-				console.error('API response did not contain expected data:', response.data);
-				api.sendMessage('❌ An error occurred while generating the text response. Please try again later.', event.threadID, messageID);
-			}
-		} catch (error) {
-			console.error('Error:', error);
-			api.sendMessage('❌ An error occurred while generating the text response. Please try again later.', event.threadID, messageID);
-		}
-	}
+const axios = require("axios"); 
+module.exports = { 
+	config: { 
+		name: 'llama', 
+		version: '1.0.1', 
+		author: 'Null69 & Aliester Crowley', 
+		countDown: 10, 
+		role: 0, 
+		category: 'Ai', 
+		shortDescription: { en: 'Llama 2 70B-4k', }, 
+		longDescription: { en: 'Llma 2 70B-4k', }, 
+		guide: { en: '{pn} [prompt]\n{pn} reset (to reset conversation)', }, 
+	}, 
+	onStart: async function({ api, message, event, args, commandName }) { 
+		let prompt = args.join(" "); 
+		if (prompt === 'reset') { 
+			const resetUrl = `https://llama.aliestercrowley.com/reset?username=${event.senderID}`; 
+			try { 
+				await axios.get(resetUrl); 
+				message.reply("Conversation reset successfully."); 
+			} catch (error) { 
+				console.error(error.message); 
+				message.reply("An error occurred while resetting the conversation."); 
+			} 
+			return; 
+		} 
+		if (!prompt) { 
+			message.reply("Please provide a query."); 
+			return; 
+		} 
+		api.setMessageReaction("🟡", event.messageID, () => {}, true); 
+		const url = `https://llama.aliestercrowley.com/api?prompt=${encodeURIComponent(prompt)}&username=${event.senderID}`; 
+		try { 
+			const response = await axios.get(url); 
+			const result = response.data.response; 
+			message.reply(`${result}`, (err, info) => { 
+				if (!err) { 
+					global.GoatBot.onReply.set(info.messageID, { 
+						commandName, 
+						messageID: info.messageID, 
+						author: event.senderID, 
+					}); 
+				} 
+			}); 
+			api.setMessageReaction("🟢", event.messageID, () => {}, true); 
+		} catch (error) { 
+			message.reply('An error occurred.'); 
+			api.setMessageReaction("🔴", event.messageID, () => {}, true); 
+		} 
+	}, 
+	onReply: async function({ api, message, event, Reply, args }) { 
+		const prompt = args.join(" "); 
+		const { author, commandName } = Reply; 
+		if (author !== event.senderID) return; // Check if sender matches 
+		if (args[0] === 'reset') { 
+			const resetUrl = `https://llama.aliestercrowley.com/reset?username=${event.senderID}`; 
+			try { 
+				await axios.get(resetUrl); 
+				message.reply("Conversation reset successfully."); 
+			} catch (error) { 
+				console.error(error.message); 
+				message.reply("An error occurred while resetting the conversation."); 
+			} 
+			return; 
+		} 
+		api.setMessageReaction("🟡", event.messageID, () => {}, true); 
+		const url = `https://llama.aliestercrowley.com/api?prompt=${encodeURIComponent(prompt)}&username=${event.senderID}`; 
+		try { 
+			const response = await axios.get(url); 
+			const content = response.data.response; 
+			message.reply(`${content}`, (err, info) => { 
+				if (!err) { 
+					global.GoatBot.onReply.set(info.messageID, { 
+						commandName, 
+						messageID: info.messageID, 
+						author: event.senderID, 
+					}); 
+				} 
+			}); 
+			api.setMessageReaction("🟢", event.messageID, () => {}, true); 
+		} catch (error) { 
+			console.error(error.message); 
+			message.reply("An error occurred."); 
+			api.setMessageReaction("🔴", event.messageID, () => {}, true); 
+		} 
+	} 
 };

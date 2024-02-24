@@ -3,3 +3,4 @@ run = "npm start"
 
 [[ports]]
 localPort = 3000
+externalPort = 80

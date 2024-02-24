@@ -1,156 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RANDOM-SHOTI BY CLIFF</title>
-	<style>
-			html,
-			body   {
-						margin: 0;
-						padding: 0;
-						width: 104%;
-						height: 100vh;
-						overflow: hidden;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						background-image: linear-gradient(45deg, #243aff 0%,  #4687f0 46%,  #5800d4 100%,  #800080 0%,  #E90207 46%,  #ff8c00 100%);
-				}
-
-				video {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>RANDOM-SHOTI</title>
+ <style>
+	 html,
+	 body   {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-image: url("https://i.imgur.com/7Bqm04S.jpg");
+			background-size: cover;
 		}
-		.glass {
-								position: absolute;
-								top: 0;
-								left: 0;
-								width: 100%;
-								height: 100%;
-								overflow: hidden;
-						}
-						.glass li {
-								position: absolute;
-								display: block;
-								list-style: none;
-								width: 20px;
-								height: 20px;
-								background: rgba(255, 255, 255, 0.1);
-								border: 1px solid rgba(255, 255, 255, 0.18);
-								animation: spin 5s linear infinite;
-								bottom: -150px;
-						}
-						.glass li:nth-child(1) {
-								left: 35%;
-								width: 150px;
-								height: 150px;
-								animation-delay: 0s;
-						}
-						.glass li:nth-child(2) {
-								left: 10%;
-								width: 20px;
-								height: 20px;
-								animation-delay: 2s;
-								animation-duration: 12s;
-						}
-						.glass li:nth-child(3) {
-								left: 70%;
-								width: 20px;
-								height: 20px;
-								animation-delay: 4s;
-						}
-						.glass li:nth-child(4) {
-								left: 40%;
-								width: 60px;
-								height: 60px;
-								animation-delay: 0s;
-								animation-duration: 18s;
-						}
-						.glass li:nth-child(5) {
-								left: 65%;
-								width: 20px;
-								height: 20px;
-								animation-delay: 0s;
-						}
-						.glass li:nth-child(6) {
-								left: 75%;
-								width: 110px;
-								height: 110px;
-								animation-delay: 3s;
-						}
-						.glass li:nth-child(7) {
-								left: 35%;
-								width: 150px;
-								height: 150px;
-								animation-delay: 7s;
-						}
-						.glass li:nth-child(8) {
-								left: 50%;
-								width: 25px;
-								height: 25px;
-								animation-delay: 15s;
-								animation-duration: 45s;
-						}
-						.glass li:nth-child(9) {
-								left: 20%;
-								width: 15px;
-								height: 15px;
-								animation-delay: 2s;
-								animation-duration: 35s;
-						}
-						.glass li:nth-child(10) {
-								left: 85%;
-								width: 150px;
-								height: 150px;
-								animation-delay: 0s;
-								animation-duration: 11s;
-						}
-						@keyframes spin {
-								0% {
-										transform: translateY(0) rotate(0deg);
-										opacity: 1;
-										border-radius: 0;
-								}
-								100% {
-										transform: translateY(-1000px) rotate(720deg);
-										opacity: 0;
-										border-radius: 50%;
-								}
-						}
-				</style>
-		</head>
-		<body>
-				<div class="bg">
-						<ul class="glass">
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-						</ul>
-				</div>
-		</body>
-		</html>
-	 </style>
-		</head>
-		<body>
-			<div class="bg">
-				<ul class="glass">
-					<!-- Your <li> elements here -->
-				</ul>
-			</div>
-	<video id="video" controls autoplay></video>
+
+		video {
+			width: 100%;
+			height: 90%; 
+			object-fit: cover;
+		}
+		.bg {
+			position: absolute;
+			top: 20px; /* Adjust as needed */
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100%;
+			text-align: center;
+			z-index: 999; /* Ensure it's above the video */
+		}
+
+		#video-container {
+			width: 80%;
+			height: 85vh;
+			margin-top: 40px;
+			position: relative;
+		}
+
+		#video {
+		 width: 100%;
+		 border-radius: 10px;
+		 height: 80%;
+		 object-fit: cover;
+		 margin: auto;
+		 /* Neon border effect */
+		 border: 2px solid transparent;
+		 animation: neon-border 2s linear infinite alternate; /* Adjust animation duration and timing */
+		}
+
+	 @keyframes neon-border {
+		 from {
+			border-color: #ff0000; /* Start color */
+			box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; /* Adjust shadow colors and sizes */
+		 }
+		 to {
+			border-color: #00ff00; /* End color */
+			box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00; /* Adjust shadow colors and sizes */
+		 }
+	 }
+
+		#apiResponse {
+		 background-color: #0000;
+		 color: #fff;
+	 }
+
+		#next-button,
+		#auto-bot-button {
+			position: absolute;
+			bottom: 20px;
+			padding: 20px 40px; /* Adjust padding as needed */
+			font-size: 18px;
+			background-color: #190096;
+			color: #e5e5e5;
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+			z-index: 999; /* Ensure it's above the video */
+			background-image: linear-gradient(45deg, #E90207, #FF8C00); 
+		}
+
+		#next-button:hover,
+		#auto-bot-button:hover {
+			background-image: linear-gradient(45deg, #243aff 0%, 
+		#4687f0 46%, 
+		#5800d4 100%);   
+		}
+
+		#next-button {
+			right: calc(50% - 160px); /* Adjust to move button to the right */
+		}
+
+		#auto-bot-button {
+			left: calc(50% - 160px); /* Adjust to move button to the left */
+		}
+
+		#title {
+			position: absolute;
+			top: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 999;
+			font-size: 24px;
+			color: #fff;
+			animation: changeColor 5s infinite;
+		}
+
+		 @keyframes changeColor {
+			0% {
+				color: red;
+			}
+			16.66% {
+				color: orange;
+			}
+			33.33% {
+				color: yellow;
+			}
+			50% {
+				color: green;
+			}
+			66.66% {
+				color: blue;
+			}
+			83.33% {
+				color: indigo;
+			}
+			100% {
+				color: violet;
+			}
+		 }
+
+	</style>
+</head>
+<body>
+
+	<div id="video-container">
+		<video id="video" controls autoplay></video>
+	</div>
+
+	<button id="next-button">ᑎE᙭T ᐯIᗪEO</button>
+	<button id="auto-bot-button" onclick="window.open('https://yazky-csb.onrender.com/', '_blank')">ᗩᑌTOᗷOT</button>
+
 	<script>
 		async function getRandomVideo() {
 			try {
-				const url = 'https://your-shoti-api.vercel.app/api/v1/get';
+				const url = 'https://shoti-server-5b293365cb713b.replit.app/api/v1/get';
 				const rawResponse = await fetch(url, {
 					method: 'POST',
 					headers: {
@@ -166,6 +163,10 @@
 		}
 
 		getRandomVideo();
+
+		document.getElementById('next-button').addEventListener('click', () => {
+			getRandomVideo();
+		});
 	</script>
 </body>
 </html>
