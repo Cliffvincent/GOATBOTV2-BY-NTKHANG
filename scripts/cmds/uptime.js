@@ -1,4 +1,5 @@
 const os = require('os');
+const fs = require('fs').promises;
 const pidusage = require('pidusage');
 
 module.exports = {
@@ -25,21 +26,40 @@ module.exports = {
 				return `${n.toFixed(n < 10 && l > 0 ? 1 : 0)} ${units[l]}`;
 		},
 
+		async getStartTimestamp() {
+				try {
+						const startTimeStr = await fs.readFile('uptime_start_time.txt', 'utf8');
+						return parseInt(startTimeStr);
+				} catch (error) {
+						// If file doesn't exist or there's an error reading it, return current timestamp
+						return Date.now();
+				}
+		},
+
+		async saveStartTimestamp(timestamp) {
+				try {
+						await fs.writeFile('uptime_start_time.txt', timestamp.toString());
+				} catch (error) {
+						console.error('Error saving start timestamp:', error);
+				}
+		},
+
 		getUptime(uptime) {
 				const days = Math.floor(uptime / (3600 * 24));
 				const hours = Math.floor((uptime % (3600 * 24)) / 3600);
 				const mins = Math.floor((uptime % 3600) / 60);
 				const seconds = Math.floor(uptime % 60);
-				const cores = `Cores: ${os.cpus().length}`;
 
-				return `Uptime: ${days} days, ${hours} hours, ${mins} minutes, and ${seconds} seconds`;
+				return `Uptime: ${days} day(s), ${hours} hour(s), ${mins} minute(s), and ${seconds} second(s)`;
 		},
 
 		onStart: async ({ api, event }) => {
-				const time = process.uptime();
-				const hours = Math.floor(time / (60 * 60));
-				const minutes = Math.floor((time % (60 * 60)) / 60);
-				const seconds = Math.floor(time % 60);
+				const startTime = await module.exports.getStartTimestamp();
+				const uptimeSeconds = Math.floor((Date.now() - startTime) / 1000);
+				const days = Math.floor(uptimeSeconds / (3600 * 24));
+				const hours = Math.floor((uptimeSeconds % (3600 * 24)) / 3600);
+				const minutes = Math.floor((uptimeSeconds % 3600) / 60);
+				const seconds = Math.floor(uptimeSeconds % 60);
 
 				const usage = await pidusage(process.pid);
 
@@ -49,8 +69,10 @@ module.exports = {
 				};
 
 				const timeStart = Date.now();
-				const returnResult = `BOT has been working for ${hours} hour(s) ${minutes} minute(s) ${seconds} second(s).\n\n❖ Cpu usage: ${usage.cpu.toFixed(1)}%\n❖ RAM usage: ${module.exports.byte2mb(usage.memory)}\n❖ Cores: ${os.cpus().length}\n❖ Ping: ${Date.now() - timeStart}ms\n❖ Operating System Platform: ${osInfo.platform}\n❖ System CPU Architecture: ${osInfo.architecture}`;
+				const uptimeMessage = module.exports.getUptime(uptimeSeconds);
+				const returnResult = `BOT has been working for ${uptimeMessage}\n\n❖ Cpu usage: ${usage.cpu.toFixed(1)}%\n❖ RAM usage: ${module.exports.byte2mb(usage.memory)}\n❖ Cores: ${os.cpus().length}\n❖ Ping: ${Date.now() - timeStart}ms\n❖ Operating System Platform: ${osInfo.platform}\n❖ System CPU Architecture: ${osInfo.architecture}`;
 
+				await module.exports.saveStartTimestamp(startTime); // Save the start time again to ensure it's updated
 				return api.sendMessage(returnResult, event.threadID, event.messageID);
 		}
 };

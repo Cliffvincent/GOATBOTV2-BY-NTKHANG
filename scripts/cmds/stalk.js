@@ -13,7 +13,7 @@ function convert(time){
 module.exports = {
 	config: {
 		name: "stalk",
-		author: "cliff",
+		author: "EUGENE",
 		version: "1.5",
 		countDown: 5,
 		role: 0,
@@ -41,7 +41,7 @@ module.exports = {
 		}
 
 		try {
-			const resp = await axios.get(`https://useless-apis.replit.app/stalk?uid=${id}`);
+			const resp = await axios.get(`http://fi3.bot-hosting.net:20284/stalk?uid=${id}`);
 			var name = resp.data.name;
 			var link_profile = resp.data.link;
 			var uid = resp.data.id;

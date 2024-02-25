@@ -59,12 +59,14 @@
   },
   "serverUptime": {
     "enable": false,
-    "port": 3001,
+    "port": 3000,
     "socket": {
       "enable": true,
       "channelName": "uptime",
-      "verifyToken": ""
-    }
+      "verifyToken": "AJ3mQqe9wrL8sF5NAwJuSteH",
+			"url": "${process.env.DevURL}",
+			"url2": "https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER"
+		}
   },
   "autoRestart": {
     "time": 3600000,
@@ -72,8 +74,9 @@
   },
   "autoUptime": {
     "enable": true,
-    "timeInterval": 500,
-    "url": "https://uptime.botrandom30.repl.co",
+    "timeInterval": 86400000,
+    "url": "${process.env.DevURL}.sisko.replit.dev/",
+		"url2": "https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER",
     "notes": "the value of timeInterval is seconds, url is the url you want to send the request to (automatically detected for hosting glitch or replit)"
   },
   "autoLoadScripts": {
