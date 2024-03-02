@@ -7,8 +7,7 @@
 	   "start": "node index"
 	},
   "engines": {
-    "node": "16.x",
-    "npm": ">=7.0.0"
+    "node": "16.x"
   },
   "dependencies": {
     "@distube/ytdl-core": "^4.13.3",
