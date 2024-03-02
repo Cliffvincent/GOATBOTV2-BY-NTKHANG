@@ -3,6 +3,9 @@
   "version": "1.5.28",
   "description": "A simple Bot chat messenger using personal account. Made by NTKhang.",
   "main": "index.js",
+	"scripts": {
+	   "start": "node index"
+	},
   "engines": {
     "node": "16.x",
     "npm": ">=7.0.0"

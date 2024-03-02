@@ -42,7 +42,7 @@ const app = express();
 const path = require('path');
 const axios = require('axios');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
 	const htmlFiles = ['clock.html', 'analog.html', 'crazy.html', 'index.html', 'randomQuote.html', 'randomVideo.html'];

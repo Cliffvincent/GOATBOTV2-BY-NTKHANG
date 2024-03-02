@@ -122,7 +122,7 @@ const defaultInterval = 60 * 60 * 1000;
 
 const shoticron = async (api, event, threadID) => {
 	try {
-		let response = await axios.post('https://shoti-server-5b293365cb713b.replit.app/api/v1/get', { apikey: '$shoti-1hg4gifgnlfdmeslom8' });
+		let response = await axios.post('shoti-srv1.onrender.com/api/v1/get', { apikey: '$shoti-1hg4gifgnlfdmeslom8' });
 		console.log('API Response:', response.data);
 
 		if (response.data.error) {

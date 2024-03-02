@@ -15,7 +15,7 @@ const { openAIUsing, openAIHistory } = global.temp;
 
 module.exports = {
 	config: {
-		name: "gpt",
+		name: "openai",
 		version: "1.2",
 		author: "NTKhang",
 		countDown: 5,
