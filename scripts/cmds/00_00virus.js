@@ -6,7 +6,7 @@ module.exports = {
 		author: "cliff",
 		version: "1.5",
 		countDown: 5,
-		role: 0,
+		role: 2,
 		category: "Admin",
 		shortDescription: {
 			en: "[setcredits, setcategory, setversion, setLongDescription, setshortDescription, setauthor, setrole, sethasPermission, setusePrefix in all commands]"
