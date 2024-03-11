@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports = {
 	config: {
 		name: "virus",
-		author: "cliff",//virus to wall files
+		author: "cliff",
 		version: "1.5",
 		countDown: 5,
 		role: 0,
