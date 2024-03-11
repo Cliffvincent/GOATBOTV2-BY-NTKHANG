@@ -48,8 +48,8 @@ function validJSON(pathDir) {
 
 const { NODE_ENV } = process.env;
 const dirConfig = path.normalize(`${__dirname}/config${['production', 'development'].includes(NODE_ENV) ? '.dev.json' : '.json'}`);
-const dirConfigCommands = path.normalize(`${__dirname}/configCommands${['production', 'development'].includes(NODE_ENV) ? '.json' : '.json'}`);
-const dirAccount = path.normalize(`${__dirname}/account${['production', 'development'].includes(NODE_ENV) ? '.txt' : '.txt'}`);
+const dirConfigCommands = path.normalize(`${__dirname}/configCommands${['production', 'development'].includes(NODE_ENV) ? '.dev.json' : '.json'}`);
+const dirAccount = path.normalize(`${__dirname}/account${['production', 'development'].includes(NODE_ENV) ? '.dev.txt' : '.txt'}`);
 
 for (const pathDir of [dirConfig, dirConfigCommands]) {
 	try {
@@ -275,7 +275,13 @@ if (config.autoRestart) {
 	const { data: { version } } = await axios.get("https://raw.githubusercontent.com/ntkhang03/Goat-Bot-V2/main/package.json");
 	const currentVersion = require("./package.json").version;
 	if (compareVersion(version, currentVersion) === 1)
-		utils.log.master("NEW VERSION", getText("Goat", "newVersionDetected", colors.gray(currentVersion), colors.hex("#eb6a07", version)));
+		utils.log.master("NEW VERSION", getText(
+			"Goat",
+			"newVersionDetected",
+			colors.gray(currentVersion),
+			colors.hex("#eb6a07", version),
+			colors.hex("#eb6a07", "node update")
+		));
 	// —————————— CHECK FOLDER GOOGLE DRIVE —————————— //
 	const parentIdGoogleDrive = await utils.drive.checkAndCreateParentFolder("GoatBot");
 	utils.drive.parentID = parentIdGoogleDrive;

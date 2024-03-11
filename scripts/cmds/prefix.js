@@ -3,13 +3,12 @@ const { utils } = global;
 
 module.exports = {
 	config: {
-		name: "prefix2",
-		version: "1.3",
+		name: "prefix",
+		version: "1.4",
 		author: "NTKhang",
 		countDown: 5,
-		role: 2,
-		shortDescription: "Thay đổi prefix của bot",
-		longDescription: "Thay đổi dấu lệnh của bot trong box chat của bạn hoặc cả hệ thống bot (chỉ admin bot)",
+		role: 0,
+		description: "Thay đổi dấu lệnh của bot trong box chat của bạn hoặc cả hệ thống bot (chỉ admin bot)",
 		category: "config",
 		guide: {
 			vi: "   {pn} <new prefix>: thay đổi prefix mới trong box chat của bạn"
@@ -96,7 +95,7 @@ module.exports = {
 	},
 
 	onChat: async function ({ event, message, getLang }) {
-		if (event.body && event.body.toLowerCase() === "prefix2")
+		if (event.body && event.body.toLowerCase() === "prefix")
 			return () => {
 				return message.reply(getLang("myPrefix", global.GoatBot.config.prefix, utils.getPrefix(event.threadID)));
 			};

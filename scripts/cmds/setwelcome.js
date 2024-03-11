@@ -4,15 +4,11 @@ module.exports = {
 	config: {
 		name: "setwelcome",
 		aliases: ["setwc"],
-		version: "1.6",
+		version: "1.7",
 		author: "NTKhang",
 		countDown: 5,
 		role: 1,
-		shortDescription: {
-			vi: "Chỉnh sửa nội dung tin nhắn chào mừng",
-			en: "Edit welcome message content"
-		},
-		longDescription: {
+		description: {
 			vi: "Chỉnh sửa nội dung tin nhắn chào mừng thành viên mới tham gia vào nhóm chat của bạn",
 			en: "Edit welcome message content when new member join your group chat"
 		},
@@ -43,7 +39,7 @@ module.exports = {
 					+ "\n  + {multiple}: you || you guys"
 					+ "\n  + {session}:  session in day"
 					+ "\n\n   Example:"
-					+ "\n    {pn} Hello ${userName}! Welcome to ${threadName}\nYou're the ${memLength}th member of this group, please enjoy!❤️🥳️"
+					+ "\n    {pn} text Hello {userName}, welcome to {boxName}, have a nice day {multiple}"
 					+ "\n"
 					+ "\n   Reply (phản hồi) or send a message with file with content {pn} file: to add file attachments to welcome message (image, video, audio)"
 					+ "\n\n   Example:"
@@ -59,7 +55,7 @@ module.exports = {
 		vi: {
 			turnedOn: "Đã bật chức năng chào mừng thành viên mới",
 			turnedOff: "Đã tắt chức năng chào mừng thành viên mới",
-			missingContent: "Vui lòng nhập nội dung tin nhắn chào mừng",
+			missingContent: "Vui lùng nhập nội dung tin nhắn",
 			edited: "Đã chỉnh sửa nội dung tin nhắn chào mừng của nhóm bạn thành: %1",
 			reseted: "Đã reset nội dung tin nhắn chào mừng",
 			noFile: "Không có tệp đính kèm tin nhắn chào mừng nào để xóa",
@@ -75,7 +71,7 @@ module.exports = {
 			reseted: "Reseted welcome message content",
 			noFile: "No file attachments to delete",
 			resetedFile: "Reseted file attachments successfully",
-			missingFile: "Please reply to this message with an image/video/audio file",
+			missingFile: "Please reply this message with image/video/audio file",
 			addedFile: "Added %1 file attachments to your group welcome message"
 		}
 	},

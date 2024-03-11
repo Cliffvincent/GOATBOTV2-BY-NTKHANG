@@ -1,13 +1,11 @@
 {
   "name": "goat-bot-v2",
-  "version": "1.5.28",
+  "version": "1.5.29",
   "description": "A simple Bot chat messenger using personal account. Made by NTKhang.",
   "main": "index.js",
-	"scripts": {
-	   "start": "node index"
-	},
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": ">=7.0.0"
   },
   "dependencies": {
     "@distube/ytdl-core": "^4.13.3",
