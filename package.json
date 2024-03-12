@@ -26,6 +26,7 @@
     "googleapis": "^100.0.0",
     "gradient-string": "^2.0.2",
     "graphql-query-to-json": "^2.0.1",
+    "gtts": "^0.2.1",
     "https": "^1.0.0",
     "jsonlint-mod": "^1.7.6",
     "moment-timezone": "^0.5.34",
