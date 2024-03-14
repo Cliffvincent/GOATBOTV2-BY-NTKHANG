@@ -1,48 +1,96 @@
-const axios = require('axios');
+const axios = require("axios");
+const jb = "i am gptopenai language model prompted by cliff how can i assist you today?"; //add your prompt//
 
 module.exports = {
 	config: {
-		name: 'gpt3',
-		version: '2.5',
-		author: 'JV Barcenas',
+		name: "gpt3",
+		version: "1.0",
+		author: "Rishad",
+		countDown: 5,
 		role: 0,
-		category: '𝗔𝗜',
 		shortDescription: {
-			en: 'Asks an AI for an answer.',
+			vi: "chat with gpt",
+			en: "chat with gpt"
 		},
 		longDescription: {
-			en: 'Asks an AI for an answer based on the user prompt.',
+			vi: "chat with gpt",
+			en: "chat with gpt"
 		},
+		category: "chat",
 		guide: {
-			en: '{pn} [prompt]',
-		},
-	},
-	onStart: async function ({ api, event }) {
-		try {
-			const prompt = event.body.trim();
-
-			if (prompt) {
-				const unsendFirstMessage = await api.sendMessage("Answering your question. Please wait a moment...", event.threadID);
-
-				const response = await axios.get(`https://chatgayfeyti.archashura.repl.co?gpt=${encodeURIComponent(prompt)}`);
-
-				if (response.status === 200 && response.data && response.data.content) {
-					const messageText = response.data.content.trim();
-					await api.sendMessage({
-						body: messageText,
-						mentions: event.mentions,
-					}, event.threadID, unsendFirstMessage.messageID);
-					console.log('Sent answer as a reply to the user');
-				} else {
-					throw new Error('Invalid or missing response from API');
-				}
-			}
-		} catch (error) {
-			console.error(`Failed to get an answer: ${error.message}`);
-			api.sendMessage(
-				`${error.message}.\n\nYou can try typing your question again or resending it, as there might be a bug from the server that's causing the problem. It might resolve the issue.`,
-				event.threadID
-			);
+			en: "{pn} 'prompt'\nexample:\n{pn} hi there \nyou can reply to chat\nyou can delete conversations by replying clear"
 		}
 	},
+	onStart: async function ({ message, event, args, commandName }) {
+		const prompt = args.join(" ");
+		if (!prompt) {
+			message.reply(`Please provide some text`);
+			return;
+		}
+
+		try {
+			const uid = event.senderID;
+			const response = await axios.get(
+				`https://for-devs.onrender.com/api/gpt?query=${encodeURIComponent(prompt)}&uid=${uid}&jbprompt=${jb}&apikey=fuck`
+			);
+
+			if (response.data && response.data.result) {
+				message.reply(
+					{
+						body: response.data.result
+					},
+					(err, info) => {
+						global.GoatBot.onReply.set(info.messageID, {
+							commandName,
+							messageID: info.messageID,
+							author: event.senderID
+						});
+					}
+				);
+			} else {
+				console.error("API Error:", response.data);
+				sendErrorMessage(message, "Server not responding ❌");
+			}
+		} catch (error) {
+			console.error("Request Error:", error.message);
+			sendErrorMessage(message, "Server not responding ❌");
+		}
+	},
+	onReply: async function ({ message, event, Reply, args }) {
+		let { author, commandName } = Reply;
+		if (event.senderID !== author) return;
+		const prompt = args.join(" ");
+
+		try {
+			const uid = event.senderID;
+			const response = await axios.get(
+				`https://for-devs.onrender.com/api/gpt?query=${encodeURIComponent(prompt)}&uid=${uid}&jbprompt=${jb}&apikey=fuck`
+			);
+
+			if (response.data && response.data.result) {
+				message.reply(
+					{
+						body: response.data.result
+					},
+					(err, info) => {
+						global.GoatBot.onReply.set(info.messageID, {
+							commandName,
+							messageID: info.messageID,
+							author: event.senderID
+						});
+					}
+				);
+			} else {
+				console.error("API Error:", response.data);
+				sendErrorMessage(message, "Server not responding ❌");
+			}
+		} catch (error) {
+			console.error("Request Error:", error.message);
+			sendErrorMessage(message, "Server not responding ❌");
+		}
+	}
 };
+
+function sendErrorMessage(message, errorMessage) {
+	message.reply({ body: errorMessage });
+}
