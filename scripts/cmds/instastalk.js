@@ -1,64 +1,59 @@
-const axios = require("axios");
+const axios = require('axios');
 
 module.exports = {
-  config: {
-    name: "instastalk",
-    version: "1.0",
-    author: "MILAN",
-    countDown: 10,
-    role: 0,
-    shortDescription: {
-      vi: "Tìm kiếm nhạc và nghe.",
-      en: "Get Instagram user info."
-    },
-    longDescription: {
-      vi: "Lệnh này cho phép bạn lấy thông tin về một người dùng Instagram, bao gồm tên người dùng, họ và tên đầy đủ, tiểu sử, số lượng người theo dõi, số lượng người đang theo dõi, danh mục, PK, trạng thái riêng tư, trạng thái xác minh, số lượng người theo dõi chung, sẵn có hướng dẫn, phương pháp liên hệ kinh doanh và URL bên ngoài. Nó cũng hiển thị hình đại diện của người dùng.",
-      en: "This command allows you to retrieve information about an Instagram user, such as their username, full name, biography, follower count, following count, category, PK, privacy status, verification status, mutual followers count, guide availability, business contact method, and external URL. It also displays the user's profile picture."
-    },
-    category: "info",
-    guide: {
-      en: "{pn} <username>",
-      vi: "{pn} <tên tài khoản}"
-    }
-  },
+	config: {
+		name: "instastalk",
+		version: "1.0",
+		author: "Samir Œ",
+		countDown: 5,
+		role: 0,
+		shortDescription: {
+			en: "Stalk Instagram profiles"
+		},
+		longDescription: {
+			en: "Fetch and display information about Instagram profiles."
+		},
+		category: "Social Media",
+		guide: {
+			en: "{prefix}instastalk <username>"
+		}
+	},
 
-  onStart: async function ({ api, event, args, message }) {
-    try {
-      const username = args.join(" ");
-      if (!username)
-        return api.sendMessage(`Please provide an Instagram username.`, event.threadID, event.messageID);
+	onStart: async function ({ api, event, args }) {
+		const username = args[0];
 
-      const response = await axios.get(`https://milanbhandari.imageapi.repl.co/iginfo?username=${username}`);
+		if (!username) {
+			return api.sendMessage("Please provide an Instagram username.", event.threadID);
+		}
 
-      if (response.data.length > 0) {
-        const data = response.data[0];
-        const message = {
-          body: `===${data.full_name}===
-────────────
-❏ Username: ${data.username}
-❏ Full Name: ${data.full_name}
-❏ Biography: ${data.biography}
-❏ Follower Count: ${data.follower_count}
-❏ Following Count: ${data.following_count}
-❏ Category: ${data.category}
-❏ PK: ${data.pk}
-❏ Is Private: ${data.is_private}
-❏ Is Verified: ${data.is_verified}
-❏ Mutual Followers Count: ${data.mutual_followers_count}
-❏ Has Guides: ${data.has_guides}
-❏ Business Contact Method: ${data.business_contact_method}
-❏ External URL: ${data.external_url}
-`,
-          attachment: await global.utils.getStreamFromURL(data.profile_pic_url_hd)
-        };
+		try {
+			const apiUrl = `https://api-samir.onrender.com/stalk/insta?username=${username}`;
+			const { data } = await axios.get(apiUrl);
+			const { user_info } = data;
 
-        return api.sendMessage(message, event.threadID);
-      } else {
-        return api.sendMessage(`No Instagram user found with that username.`, event.threadID);
-      }
-    } catch (error) {
-      console.error(error);
-      message.reply("An error occurred while fetching Instagram user data.");
-    }
-  }
+			if (!user_info) {
+				return api.sendMessage("Profile not found.", event.threadID);
+			}
+
+			const profilePicStream = await global.utils.getStreamFromURL(user_info.profile_pic_url);
+
+			const messageBody = `
+👤 Full Name: ${user_info.full_name}
+🆔 Username: @${user_info.username}
+📝 Biography: ${user_info.biography}
+🔗 External URL: ${user_info.external_url ? user_info.external_url : "does not have"}
+🔒 Private Account: ${user_info.is_private ? "Yes" : "No"}
+✔ Verified: ${user_info.is_verified ? "Yes" : "No"}
+📸 Posts: ${user_info.posts}
+👥 Followers: ${user_info.followers}
+👣 Following: ${user_info.following}
+			`.trim();
+
+
+			await api.sendMessage({ body: messageBody, attachment: profilePicStream }, event.threadID);
+		} catch (error) {
+			console.error(error);
+			return api.sendMessage("An error occurred while fetching the Instagram profile.", event.threadID);
+		}
+	}
 };
