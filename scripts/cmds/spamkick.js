@@ -8,7 +8,8 @@ module.exports = {
 		name: "spamkick",
 		aliases: ["spamkick"],
 		version: "1.0",
-		author: "Jonnel and Blue"
+		author: "Jonnel and Blue",
+		category: "admin",
 	},
 
 	toggleSpamDetection: function () {

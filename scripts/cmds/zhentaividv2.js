@@ -1,7 +1,6 @@
 module.exports = {
   config: {
     name: "hentaivid2",
-    aliases: ["hvdo"],
     version: "1.0",
     author: "kshitiz",
     countDown: 60,

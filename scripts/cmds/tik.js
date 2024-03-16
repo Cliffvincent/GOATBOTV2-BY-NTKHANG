@@ -3,7 +3,7 @@ const axios = require('axios');
 
 module.exports = {
 	config: {
-		name: 'tik',
+		name: 't',
 		version: '2.5.4',
 		author: 'Eugene Aguilar',
 		role: 0,

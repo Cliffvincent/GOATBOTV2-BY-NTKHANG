@@ -4,7 +4,6 @@ const tinyurl = require('tinyurl');
 module.exports = {
 	config: {
 		name: "upscaleai",
-		aliases: ["4k", "upscale"],
 		version: "1.0",
 		author: "JARiF",
 		countDown: 15,

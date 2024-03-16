@@ -1,7 +1,6 @@
 module.exports = {
   config: {
-    name: "quest",
-    aliases: ["nea"], 
+    name: "quest", 
     version: "1.0",
     author: "LiANE",
     countDown: 15,

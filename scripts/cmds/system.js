@@ -9,7 +9,7 @@ module.exports = {
     role: 0,
     shortDescription: "System",
     longDescription: "",
-    category: "",
+    category: "system",
     guide: "{pn}"
   },
 

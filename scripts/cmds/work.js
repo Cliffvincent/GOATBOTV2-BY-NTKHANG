@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     name: "work",
-    aliases: ["nea"], 
+    aliases: ["wo"], 
     version: "1.0",
     author: "LiANE",
     countDown: 60,
