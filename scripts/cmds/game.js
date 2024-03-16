@@ -15,7 +15,6 @@ module.exports = {
 			en: ""
 		},
 		category: "game",
-		category: "",
 		guide: "",
 
 	},

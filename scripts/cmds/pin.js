@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 
 module.exports = {
 	config: {
-		name: 'Pinterest',
+		name: 'Pin',
 		aliases: ["pint", "pinter"],
 		version: '1.2',
 		author: 'Samuel',
