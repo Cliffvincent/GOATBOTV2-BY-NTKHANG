@@ -14,6 +14,7 @@ module.exports = {
 			vi: "",
 			en: ""
 		},
+		category: "game",
 		category: "",
 		guide: "",
 

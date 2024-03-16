@@ -3,7 +3,6 @@ const malScraper = require('mal-scraper');
 module.exports = {
 	config: {
 		name: "malnews",
-		aliases: ["animenews"],
 		version: "1.0",
 		author: "Samir",
 		countDown: 5,

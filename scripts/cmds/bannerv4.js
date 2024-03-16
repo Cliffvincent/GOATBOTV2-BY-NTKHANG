@@ -2,7 +2,7 @@ const axios = require("axios");
 const fs = require("fs-extra");
 
 const config = {
-	name: "banner2",
+	name: "banner4",
 	version: "1.0.2",
 	author: {
 		name: "NTKhang",

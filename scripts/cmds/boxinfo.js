@@ -3,7 +3,7 @@ const request = require("request");
 
 module.exports = {
 config: {
-    name: "groupinfo",
+    name: "boxinfo",
     aliases: ['boxinfo'],
     version: "1.0",
     author: "xemon",

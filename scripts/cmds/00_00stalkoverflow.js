@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = {
 	config: {
 		name: 'stackoverflow',
-		aliases: 'stack',
+		aliases: ['stack'],
 		version: '1.0',
 		author: 'Samir Œ , Faith Xe',
 		countDown: 5,

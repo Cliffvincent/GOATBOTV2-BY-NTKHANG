@@ -1,4 +1,5 @@
 const malScraper = require("mal-scraper");
+
 module.exports = {
   'config': {
     'name': "aninews",

@@ -1,7 +1,7 @@
 module.exports = {
 	config: {
 		name: 'googlesearch',
-		aliases: ['google', 'search'],
+		aliases: ['googleit', 'searchh'],
 		version: '1.0',
 		author: 'Samir Œ',
 		shortDescription: 'Perform a Google search.',

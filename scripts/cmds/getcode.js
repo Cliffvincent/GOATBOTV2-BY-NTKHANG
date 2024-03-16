@@ -5,7 +5,8 @@ module.exports = {
     name: "getCode",
     aliases: ["getcode"],
     version: "1.0",
-    author: "Xyron Chen"
+    author: "Xyron Chen",
+		category: "general"
   },
 
   onStart: async function ({ api, event, args }) {

@@ -10,7 +10,7 @@ module.exports = {
 		role: 2,
 		shortDescription: "Join bot gc",
 		longDescription: "",
-		category: "",
+		category: "sheshh",
 		guide: "{pn}"
 	},
 

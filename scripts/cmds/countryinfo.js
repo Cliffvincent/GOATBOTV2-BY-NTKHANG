@@ -5,6 +5,7 @@ module.exports = {
     name:"countryinfo",
     aliases: ["countryinfo"],
     version: "1.0",
+		category: "info",
     author: "Lahatra"
   },
 

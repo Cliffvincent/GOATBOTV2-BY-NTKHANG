@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = {
 	config: {
 		name: "tiktokid",
-		aliases: "tikuser",
+		aliases: ["tikuser"],
 		version: "6.9.0",
 		author: "dipto",
 		countDown: 15,

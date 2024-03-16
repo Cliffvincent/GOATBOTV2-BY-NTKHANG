@@ -14,7 +14,7 @@ module.exports = {
       vi: "",
       en: ""
     },
-    category: "",
+    category: "movie",
     guide: "",
 
   },

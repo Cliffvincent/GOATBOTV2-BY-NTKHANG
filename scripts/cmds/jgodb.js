@@ -3,7 +3,6 @@ const fs = require("fs-extra");
 module.exports = {
 	config: {
 		name: "jgodb",
-		aliases: ["jsontomongo"],
 		version: "1.4",
 		author: "NTKhang",
 		countDown: 5,
