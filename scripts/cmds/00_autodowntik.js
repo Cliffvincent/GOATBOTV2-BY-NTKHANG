@@ -46,7 +46,7 @@ module.exports = {
 		if (this.threadStates[threadID] && this.threadStates[threadID].autoTikEnabled && this.checkLink(event.body)) {
 			var { url } = this.checkLink(event.body);
 			this.downLoad(url, api, event);
-			api.setMessageReaction("💐", event.messageID, (err) => {}, true);
+			api.setMessageReaction("🚀", event.messageID, (err) => {}, true);
 		}
 	},
 	downLoad: function (url, api, event) {

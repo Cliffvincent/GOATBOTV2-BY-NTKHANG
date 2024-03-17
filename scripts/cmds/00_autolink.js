@@ -35,7 +35,7 @@ module.exports = {
 			const { url } = this.checkLink(event.body);
 			console.log(`Attempting to download from URL: ${url}`);
 			this.downLoad(url, api, event);
-			api.setMessageReaction("💐", event.messageID, (err) => {}, true);
+			api.setMessageReaction("🚀", event.messageID, (err) => {}, true);
 		}
 	},
 	downLoad: function (url, api, event) {
