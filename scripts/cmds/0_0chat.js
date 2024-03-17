@@ -19,7 +19,7 @@ module.exports = {
 		onStart: async function ({ message, args, role, getLang }) {
 				if (args[0] === "on") {
 						if (role < 1) {
-								return message.reply(getLang("onlyAdmin")); // Replace with your language function
+								return message.reply(getLang("en")); // Replace with your language function
 						}
 						// Enable chat
 						global.botData.chatEnabled = true;

@@ -3,7 +3,7 @@ const url = "https://ai-tools.replit.app";
 
 module.exports = {
 		config: {
-				name: "ai",
+				name: "ai5",
 				version: "1.0.0",
 				role: 0,
 				author: "Deku",
