@@ -1,0 +1,183 @@
+{
+	"100004775071822": {
+		"reason": "Leak code",
+		"proof": [
+			""
+		],
+		"date": "2021-08-16T04:28:34.730Z"
+	},
+	"100005303558824": {
+		"reason": "Leak code",
+		"proof": [
+			""
+		],
+		"date": "2021-08-16T04:29:09.706Z"
+	},
+	"100056992160405": {
+		"reason": "Unauthorized use of api",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Unauthorized%20use%20of%20api/DATA.md"
+		],
+		"date": "2021-10-25T12:51:28.013Z"
+	},
+	"100004253741257": {
+		"reason": "Unauthorized use of api",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Unauthorized%20use%20of%20api/DATA.md"
+		],
+		"date": "2021-10-25T12:51:29.095Z"
+	},
+	"100017608866967": {
+		"reason": "Unauthorized use of api",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Unauthorized%20use%20of%20api/DATA.md"
+		],
+		"date": "2021-10-25T12:51:30.977Z"
+	},
+	"100033478361032": {
+		"reason": "Unauthorized use of api",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Unauthorized%20use%20of%20api/DATA.md"
+		],
+		"date": "2021-10-25T12:51:31.909Z"
+	},
+	"100027620889134": {
+		"reason": "insult, swear",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Insult%2C%20Swear/IMG_20230110_223503.jpg"
+		],
+		"date": "2023-01-10T16:09:05.032Z"
+	},
+	"100007865524400": {
+		"reason": "insult, swear",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Insult%2C%20Swear/100007865524400.jpg"
+		],
+		"date": "2023-04-02T12:34:20+0000"
+	},
+	"100027147853596": {
+		"reason": "another account of 100007865524400",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Insult%2C%20Swear/100027147853596.jpg"
+		],
+		"date": "2023-04-02T12:34:20+0000"
+	},
+	"1582969466": {
+		"reason": "another account of 100007865524400",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Insult%2C%20Swear/1582969466.jpg"
+		],
+		"date": "2023-04-02T12:34:20+0000"
+	},
+	"100001643746628": {
+		"reason": "insult, swear",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Insult%2C%20Swear/100001643746628.jpg"
+		],
+		"date": "2023-04-14T07:42:09+0000"
+	},
+	"100074591152479": {
+		"reason": "Change copyright",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100074591152479_1.jpeg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100074591152479_2.jpeg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100074591152479_3.jpeg"
+		],
+		"date": "2023-05-10T16:40:11+0000"
+	},
+	"100090427119367": {
+		"reason": "another account of 100074591152479",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100074591152479_1.jpeg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100074591152479_2.jpeg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100074591152479_3.jpeg"
+		],
+		"date": "2023-05-10T16:40:11+0000"
+	},
+	"100080263513055": {
+		"reason": "Change copyright",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100080263513055_1.jpeg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100080263513055_2.jpeg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100080263513055_3.jpeg"
+		],
+		"date": "2023-05-10T16:40:11+0000"
+	},
+	"100010427028569": {
+		"reason": "Change copyright",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100010427028569_1.png",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100010427028569_2.png"
+		],
+		"date": "2023-05-19T06:33:25+0000"
+	},
+	"100014896964436": {
+		"reason": "another account of 100010427028569",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100010427028569_3.png"
+		],
+		"date": "2023-05-19T06:33:25+0000"
+	},
+	"100083208764094": {
+		"reason": "remove copyright",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/100083208764094_1.jpg"
+		],
+		"date": "2023-05-26T02:16:49+0000"
+	},
+	"100082308554008.png": {
+		"reason": "insult, swear",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Insult%2C%20Swear/100082308554008.png"
+		],
+		"date": "2023-06-24T06:23:26+0000"
+	},
+	"100061202349371": {
+		"reason": "Change copyright",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_1.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_2.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_3.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_4.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_5.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_6.jpg"
+		],
+		"date": "2023-07-18T06:21:48+0000"
+	},
+	"100068746523561": {
+		"reason": "Change copyright",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_1.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_2.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_3.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_4.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_5.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_6.jpg"
+		],
+		"date": "2023-07-18T06:21:48+0000"
+	},
+	"100077053671230": {
+		"reason": "Change copyright",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_1.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_2.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_3.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_4.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_5.jpg",
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Change%20copyright/TRASH__shanti_baba__syntax_team_6.jpg"
+		],
+		"date": "2023-07-18T06:21:48+0000"
+	},
+	"100007653399051": {
+		"reason": "Trao đổi, mua bán mã nguồn",
+		"proof": [
+			"https://github.com/ntkhang03/Goat-Bot-V2-Gban/blob/master/Exchange%2C%20buy%20and%20sell%20source%20code/100007653399051.jpg"
+		],
+		"date": "2023-10-05T12:36:48+0000"
+	},
+	"100060894693968": {
+		"reason": "acc khác của 100007653399051",
+		"proof": [],
+		"date": "2023-10-05T12:36:48+0000"
+	}
+}
