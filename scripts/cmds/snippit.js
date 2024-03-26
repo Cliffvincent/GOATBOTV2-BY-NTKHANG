@@ -33,7 +33,7 @@ module.exports = {
 		message.reply("Initializing image, please wait...", async (err, info) => {
 			let id = info.messageID;
 			try {
-				const API = `https://api-samir.onrender.com/carbon?code=${encodeURIComponent(text)}&themeNumber=${encodeURIComponent(backgroundColor || "5")}`;
+				const API = `https://apis-samir.onrender.com/carbon?code=${encodeURIComponent(text)}&themeNumber=${encodeURIComponent(backgroundColor || "5")}`;
 				const imageStream = await global.utils.getStreamFromURL(API);
 				message.unsend(id);
 				message.reply({
