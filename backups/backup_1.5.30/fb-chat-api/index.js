@@ -151,7 +151,6 @@ function buildAPI(globalOptions, html, jar) {
 		syncToken: undefined,
 		wsReqNumber: 0,
 		wsTaskNumber: 0,
-		reqCallbacks: {},
 		mqttEndpoint,
 		region,
 		firstListen: true
@@ -197,7 +196,6 @@ function buildAPI(globalOptions, html, jar) {
 		'getThreadPictures',
 		'getUserID',
 		'getUserInfo',
-		'handleFriendRequest',
 		'handleMessageRequest',
 		'listenMqtt',
 		'logout',
@@ -370,11 +368,10 @@ function login(loginData, options, callback) {
 	setOptions(globalOptions, options);
 
 	let prCallback = null;
-	let returnPromise;
 	if (utils.getType(callback) !== "Function" && utils.getType(callback) !== "AsyncFunction") {
 		let rejectFunc = null;
 		let resolveFunc = null;
-		returnPromise = new Promise(function (resolve, reject) {
+		var returnPromise = new Promise(function (resolve, reject) {
 			resolveFunc = resolve;
 			rejectFunc = reject;
 		});
