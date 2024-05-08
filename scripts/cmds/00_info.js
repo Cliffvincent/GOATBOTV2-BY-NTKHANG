@@ -39,14 +39,14 @@ module.exports = {
 			body: `《  Bot & Owner Info 》
 \Name: ${botName}
 \Bot Prefix: ${botPrefix}
-\owner: ${authorName}
-\age : ${ownAge}
-\Facebook: ${authorFB}
-\Instagram: ${authorInsta}
-\TikTok: ${tikTok}
+\owner: 𝐌𝐀𝐇𝐈 𝐊𝐇𝐀𝐍
+\age : 18+
+\Facebook: https://www.facebook.com/profile.php?id=61554150227725
+\Instagram: 𝐎𝐍𝐄
+\TikTok: 𝐍𝐎𝐍𝐄
 \Datee: ${date}
 \Time: ${time}
-\Team: ${teamName}
+\Team: 𝐍𝐎𝐍𝐄
 \Uptime: ${uptimeString}
 \===============`,
 			attachment: await global.utils.getStreamFromURL(link)
