@@ -215,11 +215,11 @@ function buildAPI(globalOptions, html, jar) {
 		'setMessageReaction',
 		'setPostReaction',
 		'setTitle',
-		'shareContact',
 		'threadColors',
 		'unsendMessage',
 		'unfriend',
 		'editMessage',
+		'shareContact',
 
 		// HTTP
 		'httpGet',
