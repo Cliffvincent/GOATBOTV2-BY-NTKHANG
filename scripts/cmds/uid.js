@@ -34,11 +34,11 @@ module.exports = {
 		}
 	},
 
-	onStart: async function ({ message, event, args, getLang }) {
+	onStart: async function ({api, message, event, args, getLang }) {
 		if (event.messageReply)
 			return message.reply(event.messageReply.senderID);
 		if (!args[0])
-			return message.reply(event.senderID);
+			return api.shareContact(event.senderID);
 		if (args[0].match(regExCheckURL)) {
 			let msg = '';
 			for (const link of args) {
@@ -50,7 +50,7 @@ module.exports = {
 					msg += `${link} (ERROR) => ${e.message}\n`;
 				}
 			}
-			message.reply(msg);
+			api.shareContact(msg);
 			return;
 		}
 
@@ -58,6 +58,6 @@ module.exports = {
 		const { mentions } = event;
 		for (const id in mentions)
 			msg += `${mentions[id].replace("@", "")}: ${id}\n`;
-		message.reply(msg || getLang("syntaxError"));
+	  message.reply(msg || getLang("syntaxError"));
 	}
 };
