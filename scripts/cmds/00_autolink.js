@@ -2,15 +2,13 @@ const fs = require("fs-extra");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const qs = require("qs");
-const { getStreamFromURL, shortenURL, randomString } = global.utils;
-
+const { getStreamFromURL, randomString } = global.utils;
 
 function loadAutoLinkStates() {
 	try {
 		const data = fs.readFileSync("autolink.json", "utf8");
 		return JSON.parse(data);
 	} catch (err) {
-
 		return {};
 	}
 }
@@ -23,15 +21,26 @@ function saveAutoLinkStates(states) {
 
 let autoLinkStates = loadAutoLinkStates();
 
+
+async function shortenURL(url) {
+	try {
+		const response = await axios.get(`https://shortner-sepia.vercel.app/kshitiz?url=${encodeURIComponent(url)}`);
+		return response.data.shortened;
+	} catch (error) {
+		console.error(error);
+		throw new Error("Failed to shorten URL");
+	}
+}
+
 module.exports = {
 	threadStates: {},
 	config: {
 		name: 'autolink',
-		version: '3.0',
+		version: '5.0',
 		author: 'Vex_Kshitiz',
 		countDown: 5,
 		role: 0,
-		shortDescription: 'Auto video downloader for Instagram, Facebook, TikTok, Twitter, pinterest and youtube',
+		shortDescription: 'Auto video downloader for Instagram, Facebook, TikTok, Twitter, Pinterest, and YouTube',
 		longDescription: '',
 		category: 'media',
 		guide: {
@@ -106,8 +115,7 @@ module.exports = {
 			}
 
 			const shortUrl = await shortenURL(res);
-			const messageBody = `𝖠𝗎𝗍𝗈 𝖣𝗈𝗐𝗇 Instagram 𝖵𝗂𝖽𝖾𝗈\n\n𝗬𝗔𝗭𝗞𝗬 𝗕𝗢𝗧 𝟭.𝟬.𝟬𝘃`;
-
+			const messageBody = `✅ 🔗 Download Url: ${shortUrl}`;
 			api.sendMessage({
 				body: messageBody,
 				attachment: fs.createReadStream(path)
@@ -132,7 +140,7 @@ module.exports = {
 				response.data.pipe(fs.createWriteStream(path));
 				response.data.on('end', async () => {
 					const shortUrl = await shortenURL(videoUrl);
-					const messageBody = `𝖠𝗎𝗍𝗈 𝖣𝗈𝗐𝗇 𝖥𝖺𝖼𝖾𝖻𝗈𝗈𝗄 𝖵𝗂𝖽𝖾𝗈\n\n𝗬𝗔𝗭𝗞𝗬 𝗕𝗢𝗧 𝟭.𝟬.𝟬𝘃`;
+					const messageBody = `✅🔗 Download Url: ${shortUrl}`;
 
 					api.sendMessage({
 						body: messageBody,
@@ -148,24 +156,30 @@ module.exports = {
 	},
 	downloadTikTok: async function (url, api, event, path) {
 		try {
-			const res = await this.getLink(url, api, event, path);
-			const response = await axios({
-				method: "GET",
-				url: res,
-				responseType: "arraybuffer"
-			});
-			fs.writeFileSync(path, Buffer.from(response.data, "utf-8"));
-			if (fs.statSync(path).size / 1024 / 1024 > 25) {
-				return api.sendMessage("The file is too large, cannot be sent", event.threadID, () => fs.unlinkSync(path), event.messageID);
+			const res = await axios.get(`https://tikdl-video.vercel.app/tiktok?url=${encodeURIComponent(url)}`);
+			if (res.data.videoUrl) {
+				const videoUrl = res.data.videoUrl;
+				const response = await axios({
+					method: "GET",
+					url: videoUrl,
+					responseType: "stream"
+				});
+				if (response.headers['content-length'] > 87031808) {
+					return api.sendMessage("The file is too large, cannot be sent", event.threadID, () => fs.unlinkSync(path), event.messageID);
+				}
+				response.data.pipe(fs.createWriteStream(path));
+				response.data.on('end', async () => {
+					const shortUrl = await shortenURL(videoUrl);
+					const messageBody = `✅🔗 Download Url: ${shortUrl}`;
+
+					api.sendMessage({
+						body: messageBody,
+						attachment: fs.createReadStream(path)
+					}, event.threadID, () => fs.unlinkSync(path), event.messageID);
+				});
+			} else {
+				api.sendMessage("", event.threadID, event.messageID);
 			}
-
-			const shortUrl = await shortenURL(res);
-			const messageBody = `✅  Download Url: ${shortUrl}`;
-
-			api.sendMessage({
-				body: messageBody,
-				attachment: fs.createReadStream(path)
-			}, event.threadID, () => fs.unlinkSync(path), event.messageID);
 		} catch (err) {
 			console.error(err);
 		}
@@ -173,7 +187,7 @@ module.exports = {
 	downloadTwitter: async function (url, api, event, path) {
 		try {
 			const res = await axios.get(`https://xdl-twitter.vercel.app/kshitiz?url=${encodeURIComponent(url)}`);
-			const videoUrl = res.data.url;
+			const videoUrl = res.data.videoUrl;
 
 			const response = await axios({
 				method: "GET",
@@ -231,7 +245,7 @@ module.exports = {
 	downloadYouTube: async function (url, api, event, path) {
 		try {
 			const res = await axios.get(`https://yt-downloader-eta.vercel.app/kshitiz?url=${encodeURIComponent(url)}`);
-			const videoUrl = res.data['480p'];
+			const videoUrl = res.data.url;
 
 			const response = await axios({
 				method: "GET",
@@ -257,13 +271,12 @@ module.exports = {
 			console.error(err);
 		}
 	},
-
 	getLink: function (url, api, event, path) {
 		return new Promise((resolve, reject) => {
 			if (url.includes("instagram")) {
 				axios({
 					method: "GET",
-					url: `https://insta-downloader-ten.vercel.app/insta?url=${encodeURIComponent(url)}`
+					url: `https://insta-kshitiz.vercel.app/insta?url=${encodeURIComponent(url)}`
 				})
 				.then(res => {
 					console.log(`API Response: ${JSON.stringify(res.data)}`);
@@ -284,9 +297,15 @@ module.exports = {
 					}
 				}).catch(err => reject(err));
 			} else if (url.includes("tiktok")) {
-				this.queryTikTok(url).then(res => {
-					resolve(res.downloadUrls);
-				}).catch(err => reject(err));
+				axios.get(`https://tikdl-video.vercel.app/tiktok?url=${encodeURIComponent(url)}`)
+				.then(res => {
+					if (res.data.videoUrl) {
+						resolve(res.data.videoUrl);
+					} else {
+						reject(new Error("Invalid response from the TikTok API"));
+					}
+				})
+				.catch(err => reject(err));
 			} else {
 				reject(new Error("Unsupported platform. Only Instagram, Facebook, and TikTok are supported."));
 			}

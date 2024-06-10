@@ -341,7 +341,7 @@
 
 						async function getBotResponse(userInput) {
 								let url = `http://158.101.198.227:8609/architecture?ask=${userInput}`;
-								let response = await fetch(url);
+								let response = await fetch(`/architecture?ask=${userInput}`);
 								if (!response.ok) {
 										throw new Error('Network response was not ok');
 								}
