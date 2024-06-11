@@ -1,11 +1,12 @@
 const axios = require('axios');
+const { GoatWrapper } = require('fca-liane-utils');
 
 module.exports = {
 		config: {
 				name: "imgur",
 				version: "1.0.0",
 				role: 0,
-				author: "eugene",
+				author: "cliff",
 				shortDescription: "imgur upload",
 				countDown: 0,
 				category: "imgur",
@@ -26,7 +27,7 @@ module.exports = {
 				}
 
 				try {
-						const res = await axios.get(`http://fi3.bot-hosting.net:20284/imgur?link=${encodeURIComponent(link2)}`);
+						const res = await axios.get(`http://158.101.198.227:8609/imgur2?link=${encodeURIComponent(link2)}`);
 						const link = res.data.uploaded.image;
 						return api.sendMessage(`Here is the Imgur link for the image you provided:\n\n${link}`, event.threadID, event.messageID);
 				} catch (error) {
@@ -35,3 +36,6 @@ module.exports = {
 				}
 		}
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
