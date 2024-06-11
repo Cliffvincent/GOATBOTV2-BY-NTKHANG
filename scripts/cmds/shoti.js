@@ -1,37 +1,58 @@
-const axios = require('axios');
-const request = require('request');
+const path = require("path");
+const axios = require("axios");
 const fs = require("fs");
-
+const { GoatWrapper } = require('fca-liane-utils');
 
 module.exports = {
-config: {
-  name: "shoti",
-  version: "1.0",
-  author: "ralph/zed",//goatbot convert
-  countDown: 20,
-  category: "media",
-},
+	config: {
+		name: "shoti",
+		version: "9",
+		credits: "Eugene Aguilar",
+		description: "Generate random shoti 😝",
+		commandCategory: "media",
+		hasPermssion: 0,
+		cooldowns: 9,
+		usages: "[shoti]",
+		role: 0,
+		hasPrefix: false,
+		author: "Cliff",
+		countDown: 5,
+	},
 
-langs: {
-  vi: {},
-  en: {},
-},
-  
-  onStart: async function ({ api, event }) {
-  
-  api.sendMessage(`⏱️ | Video is sending please wait.`, event.threadID, event.messageID);
-axios.get('https://apivideo.saikidesu-support.repl.co/tiktok?apikey=opa').then(res => {
-  let ext = res.data.url.substring(res.data.url.lastIndexOf(".") + 1);
-  let callback = function () {
-          api.sendMessage({
-                                                body: `Shoti Viet Version 🤍`,
-            attachment: fs.createReadStream(__dirname + `/cache/shoti.${ext}`)
-          }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/shoti.${ext}`), event.messageID);
-        };
-        request(res.data.url).pipe(fs.createWriteStream(__dirname + `/cache/shoti.${ext}`)).on("close", callback);
-      }) .catch(err => {
-                     api.sendMessage("api error status: 200", event.threadID, event.messageID);
-    api.setMessageReaction("😢", event.messageID, (err) => {}, true);
-                  })     
-},
+	onStart: async function ({ api, message, event, args }) {
+		try {
+			api.setMessageReaction("🕥", event.messageID, (err) => {}, true);
+
+			const response = await axios.post(`https://shotiapi.onrender.com/api/request/f`);
+
+			const video = response.data.data.eurixmp4;
+			const username = response.data.data.username;
+			const nickname = response.data.data.nickname;
+			const title = response.data.data.title;
+
+			const videoPath = path.join(__dirname, "cache", "eabab.mp4");
+
+			const videoResponse = await axios.get(video, { responseType: "arraybuffer" });
+
+			fs.writeFileSync(videoPath, Buffer.from(videoResponse.data));
+
+			api.setMessageReaction("✅", event.messageID, (err) => {}, true);
+
+			await api.sendMessage(
+				{
+					body: `Here is your shoti video:\nProvided by: Eugene Aguilar\n\nUsername: ${username}\nNickname: ${nickname}\nTitle: ${title}`,
+					attachment: fs.createReadStream(videoPath),
+				},
+				event.threadID,
+				event.messageID
+			);
+			fs.unlinkSync(videoPath);
+		} catch (error) {
+			api.sendMessage(`error: ${error.message}`, event.threadID, event.messageID);
+			console.log(error);
+		}
+	}
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });

@@ -1,6 +1,7 @@
 const PastebinAPI = require('pastebin-js');
 const fs = require('fs');
 const path = require('path');
+const { GoatWrapper } = require('fca-liane-utils');
 
 module.exports = {
 	config: {
@@ -57,3 +58,6 @@ module.exports = {
 		});
 	},
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });

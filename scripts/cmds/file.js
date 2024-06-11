@@ -1,9 +1,9 @@
 const fs = require('fs');
+const { GoatWrapper } = require('fca-liane-utils');
 
 module.exports = {
 	config: {
 		name: "file",
-		aliases: ["files"],
 		version: "1.0",
 		author: "Mahir Tahsan",
 		countDown: 5,
@@ -34,3 +34,5 @@ module.exports = {
 		api.sendMessage({ body: fileContent }, event.threadID);
 	}
 };
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
