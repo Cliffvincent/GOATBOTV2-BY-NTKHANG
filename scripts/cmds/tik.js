@@ -1,54 +1,71 @@
-const fs = require('fs');
-const axios = require('axios');
+const { GoatWrapper } = require('fca-liane-utils');
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
 	config: {
-		name: 't',
-		version: '2.5.4',
-		author: 'Eugene Aguilar',
+		name: "tiktok",
+		version: "1.0.0",
 		role: 0,
-		category: 'tools',
-		shortDescription: {
-			en: 'Download TikTok videos',
-		},
-		longDescription: {
-			en: 'Download TikTok videos',
-		},
-		guide: {
-			en: 'tik video <link>\ntik audio <link>'
-		},
+		countDown: 0,
+		credits: "cliff",
+		author: "cliff",
+		shortDescription: "tiktok search videos",
+		hasPrefix: false,
+		category: "search",
+		aliases: ["tik"],
+		usage: "[Tiktok <search>]",
+		cooldown: 5,
 	},
 
-	onStart: async function ({ api, event, args, prefix }) {
-		if (!args[0]) {
-			api.sendMessage(`Usage: ${prefix}tik video <link>\n${prefix}tik audio <link>`, event.threadID, event.messageID);
-		} else if (args[0] === "video" || args[0] === "audio") {
-			const mediaType = args[0];
-			const path = __dirname + `/cache/tik.${mediaType === "video" ? "mp4" : "mp3"}`;
-			const url = args[1];
-
-			try {
-				api.sendMessage(`Downloading ${mediaType === "video" ? "video" : "audio"}, please wait...`, event.threadID, event.messageID);
-				const response = await axios.get(`https://eurix-api.replit.app/api/tiktokdl/tools?link=${url}`);
-				const mediaUrl = response.data.url;
-				const title = response.data.title || "undefined";
-				const username = response.data.username || "undefined";
-				const nickname = response.data.nickname || "undefined";
-
-				const mediaResponse = await axios.get(mediaUrl, { responseType: 'stream' });
-				const writer = fs.createWriteStream(path);
-
-				mediaResponse.data.pipe(writer);
-
-				writer.on('finish', function () {
-					api.sendMessage({ body: `Downloaded Successfully.\nTitle: ${title}\nUsername: ${username}\nNickname: ${nickname}`, attachment: fs.createReadStream(path) }, event.threadID, event.messageID);
-				});
-			} catch (error) {
-				console.error("Error downloading TikTok media:", error);
-				api.sendMessage("Failed to download TikTok media. Please check the provided link.", event.threadID, event.messageID);
+	onStart: async function({ api, event, args }) {
+		try {
+			const searchQuery = args.join(" ");
+			if (!searchQuery) {
+				api.sendMessage("Usage: tiktok <search text>", event.threadID);
+				return;
 			}
-		} else {
-			api.sendMessage(`Invalid command. Usage: ${prefix}tik video <link>\n${prefix}tik audio <link>`, event.threadID, event.messageID);
+
+			api.sendMessage("⏱️ | Searching, please wait...", event.threadID);
+
+			const response = await axios.get(`http://158.101.198.227:8609/tiksearch?search=${encodeURIComponent(searchQuery)}`);
+			const videos = response.data.data.videos;
+
+			if (!videos || videos.length === 0) {
+				api.sendMessage("No videos found for the given search query.", event.threadID);
+				return;
+			}
+
+			const videoData = videos[0];
+			const videoUrl = videoData.play;
+
+			const message = `𝐓𝐢𝐤𝐭𝐨𝐤 𝐫𝐞𝐬𝐮𝐥𝐭:\n\n𝐏𝐨𝐬𝐭 𝐛𝐲: ${videoData.author.nickname}\n𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞: ${videoData.author.unique_id}\n\n𝐓𝐢𝐭𝐥𝐞: ${videoData.title}`;
+
+			const filePath = path.join(__dirname, `/cache/tiktok_video.mp4`);
+			const writer = fs.createWriteStream(filePath);
+
+			const videoResponse = await axios({
+				method: 'get',
+				url: videoUrl,
+				responseType: 'stream'
+			});
+
+			videoResponse.data.pipe(writer);
+
+			writer.on('finish', () => {
+				api.sendMessage(
+					{ body: message, attachment: fs.createReadStream(filePath) },
+					event.threadID,
+					() => fs.unlinkSync(filePath)
+				);
+			});
+		} catch (error) {
+			console.error('Error:', error);
+			api.sendMessage("An error occurred while processing the request.", event.threadID);
 		}
 	}
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
