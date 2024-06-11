@@ -33,18 +33,18 @@ module.exports = {
 			syntaxError: "Syntax error, only use {pn} on or {pn} off",
 			turnedOn: "Turned on level up notification",
 			turnedOff: "Turned off level up notification",
-			notiMessage: "🎉🎉 Congratulations on reaching level %1"
+			notiMessage: `𝙇𝙫𝙡 𝙐𝙥! 『 @${userData.name} 』👏, Your typing abilities reached level  %1`
 		}
 	},
 
-	onStart: async function ({ message, event, threadsData, args, getLang }) {
+	onStart: async function ({ message, event, threadsData, args, api, getLang }) {
 		if (!["on", "off"].includes(args[0]))
 			return message.reply(getLang("syntaxError"));
 		await threadsData.set(event.threadID, args[0] == "on", "settings.sendRankupMessage");
 		return message.reply(args[0] == "on" ? getLang("turnedOn") : getLang("turnedOff"));
 	},
 
-	onChat: async function ({ threadsData, usersData, event, message, getLang }) {
+	onChat: async function ({ threadsData, usersData, event, message, api, getLang }) {
 		const threadData = await threadsData.get(event.threadID);
 		const sendRankupMessage = threadData.settings.sendRankupMessage;
 		if (!sendRankupMessage)
@@ -74,7 +74,7 @@ module.exports = {
 				formMessage.body = customMessage;
 			}
 			else {
-				formMessage.body = getLang("notiMessage", currentLevel);
+				formMessage.body = api.shareContact(getLang("notiMessage", event.senderID, currentLevel));
 			}
 
 			if (threadData.data.rankup?.attachments?.length > 0) {
@@ -95,7 +95,7 @@ module.exports = {
 				}];
 			}
 
-			message.reply(formMessage);
+			api.sendMessage(formMessage);
 		}
 	}
 };

@@ -2,7 +2,7 @@ const { GoatWrapper } = require('fca-liane-utils');
 
 let fontEnabled = true;
 
-function formatFont(text) { 
+function formatFont(text) {
   const fontMapping = {
     a: "𝖺", b: "𝖻", c: "𝖼", d: "𝖽", e: "𝖾", f: "𝖿", g: "𝗀", h: "𝗁", i: "𝗂", j: "𝗃", k: "𝗄", l: "𝗅", m: "𝗆",
     n: "𝗇", o: "𝗈", p: "𝗉", q: "𝗊", r: "𝗋", s: "𝗌", t: "𝗍", u: "𝗎", v: "𝗏", w: "𝗐", x: "𝗑", y: "𝗒", z: "𝗓",
@@ -48,16 +48,17 @@ module.exports = {
         }, event.messageID);
       });
 
-      const wrapper = new GoatWrapper(module.exports);
-      wrapper.applyNoPrefix({ allowPrefix: true });
-
       const response = await axios.get(`http://158.101.198.227:8609/google?prompt=${encodeURIComponent(user)}`);
       const responseData = response.data.response;
-      const baby = `(𝗨𝗟𝗠 𝗠𝗢𝗗𝗘𝗟-Trained by Google)\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n\n${responseData}`;
-      message.reply(formatFont(baby), event.threadID, event.messageID);
+      const baby = `(𝗨𝗟𝗠 𝗠𝗢𝗗𝗘𝗟-Trained by Google)\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n${responseData}`;
+      api.editMessage(formatFont(baby), cliff.messageID);
     } catch (err) {
       console.error(err);
       return api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
     }
   }
 };
+
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });

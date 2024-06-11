@@ -1,10 +1,12 @@
+const { GoatWrapper } = require('fca-liane-utils');
+
 const JavaScriptObfuscator = require('javascript-obfuscator');
 
 module.exports = {
 	config: {
 		name: "ob",
 		aliases: ["obfuscate"],
-		author: "kshitiz",//by cliff  
+		author: "cliff",  
 		version: "2.0",
 		cooldowns: 5,
 		role: 0,
@@ -86,5 +88,8 @@ module.exports = {
 		);
 
 		api.sendMessage(obfuscationResult.getObfuscatedCode(), event.threadID, event.messageID);
-	}
+ }
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });

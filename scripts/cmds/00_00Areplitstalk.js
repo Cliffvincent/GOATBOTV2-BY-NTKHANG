@@ -1,3 +1,4 @@
+const { GoatWrapper } = require('fca-liane-utils');
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
@@ -50,5 +51,8 @@ module.exports = {
       console.log(error);
       api.sendMessage(`Error fetching user info.`, event.threadID, event.messageID);
     }
-  }
+	}
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
