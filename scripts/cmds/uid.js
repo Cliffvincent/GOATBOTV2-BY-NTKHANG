@@ -36,9 +36,9 @@ module.exports = {
 
 	onStart: async function ({api, message, event, args, getLang }) {
 		if (event.messageReply)
-			return message.reply(event.messageReply.senderID);
+			return api.shareContact(event.messageReply.senderID, event.messageReply.senderID, event.threadID);
 		if (!args[0])
-			return api.shareContact(id, event.senderID, event.threadID);
+			return api.shareContact(event.senderID, event.senderID, event.threadID);
 		if (args[0].match(regExCheckURL)) {
 			let msg = '';
 			for (const link of args) {

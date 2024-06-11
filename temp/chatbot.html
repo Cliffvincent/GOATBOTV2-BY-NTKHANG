@@ -4,6 +4,8 @@
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<title>SHIPAZKY-AI</title>
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-ZtMvTm3TIHSSBzoiGoHEa+lFeoIYWi+UUJvO7Wph0NrfWhBEtd+5uyzpDmI9/yeYXrGdHX4C6h32Jx3ax2sBbw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 				<link rel="icon" type="image/x-icon" href="https://i.imgur.com/M2ZeXB9.jpeg">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" content="stonechat"/>
@@ -263,6 +265,10 @@
 								<button id="send-button" class="send-button">Send</button>
 						</div>
 				</div>
+			<code class="txt language-javascript"></code>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-javascript.min.js"></script>
 				<script>
 						let c = document.getElementById('container');
 						let button = document.getElementById('send-button');
@@ -340,35 +346,50 @@
 						});
 
 						async function getBotResponse(userInput) {
-								let url = `http://158.101.198.227:8609/architecture?ask=${userInput}`;
-								let response = await fetch(`/architecture?ask=${userInput}`);
-								if (!response.ok) {
-										throw new Error('Network response was not ok');
-								}
-								let data = await response.json();
-								let botResponse = data.architecture;
 
-								if (userInput.toLowerCase().includes('sino gumawa sayo') || userInput.toLowerCase().includes('who created you')) {
-
-										botResponse = "I was created by Cliff Vincent. If you encounter any bugs or issues, please feel free to chat with me on my Facebook account: <a href='https://www.facebook.com/swordigo.swordslush' target='_blank'>Yazky</a>";
-
-								}
-
-								if (userInput.toLowerCase().includes('who are you') || userInput.toLowerCase().includes('who you')) {
-
-										botResponse = "Such a nice question you have! I am an AI assistant created by <a href='https://www.facebook.com/profile.php?id=61550011623347' target='_blank'>Cliff Vincent</a> and here to help answer your questions and provide information on a variety of topics.";
-
-								}
-
-								if (userInput.toLowerCase().includes('what is your name') || userInput.toLowerCase().includes('whats your name')) {
-
-										botResponse = "I am a language model AI assistant powered by OpenAI. You can call me Inno. How may I assist you today?";
-
-								}
-
-								botResponse = botResponse.replace(/\n/g, '<br>');
-								return botResponse;
+		let response = await fetch(`/architecture?ask=${userInput}`)
+				.then(response => {
+						if (!response.ok) {
+								throw new Error('Network response was not ok');
 						}
-				</script>
-		</body>
+						return response.json();
+				})
+				.then(data => {
+						const responseBox = $('.bot-message .txt');
+						if (data.architecture) {
+								responseBox.html(Prism.highlight(data.architecture, Prism.languages.javascript, 'javascript'));
+								$('.bot-message').show();
+						} else if (data.error) {
+								responseBox.text(`Error: ${data.error}`);
+								$('.bot-message').show();
+						}
+						return data; 
+				})
+				.catch(error => {
+						const responseBox = $('.bot-message .txt');
+						responseBox.text(`Error: ${error.message}`);
+						$('.bot-message').show();
+						throw error; 
+				});
+
+		let botResponse = response.architecture;
+
+		if (userInput.toLowerCase().includes('sino gumawa sayo') || userInput.toLowerCase().includes('who created you')) {
+				botResponse = "I was created by Cliff Vincent. If you encounter any bugs or issues, please feel free to chat with me on my Facebook account: <a href='https://www.facebook.com/swordigo.swordslush' target='_blank'>Yazky</a>";
+		}
+
+		if (userInput.toLowerCase().includes('who are you') || userInput.toLowerCase().includes('who you')) {
+				botResponse = "Such a nice question you have! I am an AI assistant created by <a href='https://www.facebook.com/profile.php?id=61550011623347' target='_blank'>Cliff Vincent</a> and here to help answer your questions and provide information on a variety of topics.";
+		}
+
+		if (userInput.toLowerCase().includes('what is your name') || userInput.toLowerCase().includes('whats your name')) {
+				botResponse = "I am a language model AI assistant powered by OpenAI. You can call me Inno. How may I assist you today?";
+		}
+
+		botResponse = botResponse.replace(/\n/g, '<br>');
+		return botResponse;
+}
+</script>
+</body>
 </html>
+
