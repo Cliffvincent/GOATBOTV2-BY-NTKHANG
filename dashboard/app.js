@@ -291,7 +291,7 @@ module.exports = async (api) => {
 			return res.status(500).send(getText("app", "serverError"));
 	});
 
-	const PORT = config.dashBoard.port || config.serverUptime.port || 8080;
+	
 	let dashBoardUrl = `https://${process.env.REPL_OWNER
 		? `${process.env.REPLIT_DB_URL}.picart.replit.dev/`
 		: process.env.API_SERVER_EXTERNAL == "https://api.glitch.com"

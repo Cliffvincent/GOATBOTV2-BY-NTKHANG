@@ -29,6 +29,7 @@ module.exports = {
 		hasPermssion: 0,
 		author: "cliff",
 	 countDown: 0,
+		category: "None",
 		credits: 'hashier',
 		description: 'powered by Snowflakes Ai',
 		usePrefix: false,

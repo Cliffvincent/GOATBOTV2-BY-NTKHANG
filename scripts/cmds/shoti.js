@@ -13,6 +13,7 @@ module.exports = {
 		hasPermssion: 0,
 		cooldowns: 9,
 	 countDown: 9,
+		category: "None",
 		usages: "[shoti]",
 		role: 0,
 		hasPrefix: false,
