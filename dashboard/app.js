@@ -296,7 +296,7 @@ module.exports = async (api) => {
 		? `${process.env.REPLIT_DB_URL}.picart.replit.dev/`
 		: process.env.API_SERVER_EXTERNAL == "https://api.glitch.com"
 			? `${process.env.PROJECT_DOMAIN}.glitch.me`
-			: `localhost:${PORT}`}`;
+			: `localhost:3000`}`;
 	dashBoardUrl.includes("localhost") && (dashBoardUrl = dashBoardUrl.replace("https", "http"));
 	await server.listen(PORT);
 	utils.log.info("DASHBOARD", `Dashboard is running: ${dashBoardUrl}`);
