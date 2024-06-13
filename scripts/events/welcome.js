@@ -45,7 +45,7 @@ module.exports = {
 				if (dataAddedParticipants.some((item) => item.userFbId == api.getCurrentUserID())) {
 					if (nickNameBot)
 						api.changeNickname(nickNameBot, threadID, api.getCurrentUserID());
-					return api.shareContact(getLang("welcomeMessage", event.senderID, prefix));
+					return message.send(getLang("welcomeMessage", prefix));
 				}
 				// if new member:
 				if (!global.temp.welcomeEvent[threadID])
@@ -89,7 +89,7 @@ module.exports = {
 					// {threadName}: name of group
 					// {session}:    session of day
 					if (userName.length == 0) return;
-					let { welcomeMessage = api.shareContact(getLang("defaultWelcomeMessage")) } =
+					let { welcomeMessage = getLang("defaultWelcomeMessage") } =
 						threadData.data;
 					const form = {
 						mentions: welcomeMessage.match(/\{userNameTag\}/g) ? mentions : null

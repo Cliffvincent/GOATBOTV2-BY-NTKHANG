@@ -16,7 +16,7 @@ module.exports = async function ({ api, threadModel, userModel, dashBoardModel, 
 };
 
 
-/***
+/**
 const { log } = global.utils;
 const cron = require('node-cron');
 const admin_name = '100053549552408';
@@ -124,4 +124,4 @@ module.exports = async function ({ api, threadModel, userModel, dashBoardModel, 
 	}
 
 	acceptPending(config.acceptPending);
-}; 
+}; **/

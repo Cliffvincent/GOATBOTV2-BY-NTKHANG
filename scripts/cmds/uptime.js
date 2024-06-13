@@ -53,8 +53,10 @@ function getUptime(uptime) {
 	const hours = Math.floor((uptime % (3600 * 24)) / 3600);
 	const mins = Math.floor((uptime % 3600) / 60);
 	const seconds = Math.floor(uptime % 60);
+	const months = Math.floor(days / 30);
+		const remainingDays = days % 30;
 
-	return `Uptime: ${days} day(s), ${hours} hour(s), ${mins} minute(s), and ${seconds} second(s)`;
+	return `Uptime: ${months} month(s}, ${remainingDays} day(s), ${hours} hour(s), ${mins} minute(s), and ${seconds} second(s)`;
 }
 
 async function onStart({ api, event }) {
@@ -69,7 +71,7 @@ async function onStart({ api, event }) {
 
 	const timeStart = Date.now();
 	const uptimeMessage = getUptime(uptimeSeconds);
-	const uid = "61557118090040";
+	const uid = "100065005240232";
 	const returnResult = `BOT has been working for ${uptimeMessage}\n\n❖ Cpu usage: ${usage.cpu.toFixed(1)}%\n❖ RAM usage: ${byte2mb(usage.memory)}\n❖ Cores: ${os.cpus().length}\n❖ Ping: ${Date.now() - timeStart}ms\n❖ Operating System Platform: ${osInfo.platform}\n❖ System CPU Architecture: ${osInfo.architecture}`;
 
 	await saveStartTimestamp(startTime);

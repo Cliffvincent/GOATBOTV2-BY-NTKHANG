@@ -80,7 +80,7 @@ module.exports = {
 			} else {
 				api.sendMessage("", event.threadID, event.messageID);
 			}
-			api.setMessageReaction("🕐", event.messageID, (err) => {}, true);
+			api.setMessageReaction("🚀", event.messageID, (err) => {}, true);
 		}
 	},
 	downLoad: function (url, api, event) {
@@ -115,9 +115,8 @@ module.exports = {
 			}
 
 			const shortUrl = await shortenURL(res);
-			const messageBody = `▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
+			
 			api.sendMessage({
-				body: messageBody,
 				attachment: fs.createReadStream(path)
 			}, event.threadID, () => fs.unlinkSync(path), event.messageID);
 		} catch (err) {
@@ -140,10 +139,8 @@ module.exports = {
 				response.data.pipe(fs.createWriteStream(path));
 				response.data.on('end', async () => {
 					const shortUrl = await shortenURL(videoUrl);
-					const messageBody = `▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
-
+					
 					api.sendMessage({
-						body: messageBody,
 						attachment: fs.createReadStream(path)
 					}, event.threadID, () => fs.unlinkSync(path), event.messageID);
 				});
@@ -170,10 +167,8 @@ module.exports = {
 				response.data.pipe(fs.createWriteStream(path));
 				response.data.on('end', async () => {
 					const shortUrl = await shortenURL(videoUrl);
-					const messageBody = `▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
-
+					
 					api.sendMessage({
-						body: messageBody,
 						attachment: fs.createReadStream(path)
 					}, event.threadID, () => fs.unlinkSync(path), event.messageID);
 				});
@@ -202,10 +197,9 @@ module.exports = {
 			response.data.pipe(fs.createWriteStream(path));
 			response.data.on('end', async () => {
 				const shortUrl = await shortenURL(videoUrl);
-				const messageBody = `▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
+				
 
-				api.sendMessage({
-					body: messageBody,
+				api.sendMessage({				
 					attachment: fs.createReadStream(path)
 				}, event.threadID, () => fs.unlinkSync(path), event.messageID);
 			});
@@ -231,10 +225,9 @@ module.exports = {
 			response.data.pipe(fs.createWriteStream(path));
 			response.data.on('end', async () => {
 				const shortUrl = await shortenURL(videoUrl);
-				const messageBody = `▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
+				
 
 				api.sendMessage({
-					body: messageBody,
 					attachment: fs.createReadStream(path)
 				}, event.threadID, () => fs.unlinkSync(path), event.messageID);
 			});
@@ -260,10 +253,9 @@ module.exports = {
 			response.data.pipe(fs.createWriteStream(path));
 			response.data.on('end', async () => {
 				const shortUrl = await shortenURL(videoUrl);
-				const messageBody = `▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
+				
 
 				api.sendMessage({
-					body: messageBody,
 					attachment: fs.createReadStream(path)
 				}, event.threadID, () => fs.unlinkSync(path), event.messageID);
 			});

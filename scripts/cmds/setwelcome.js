@@ -91,7 +91,7 @@ module.exports = {
 				await threadsData.set(threadID, {
 					data
 				});
-				message.reply(data.welcomeMessage ? getLang("edited", event.senderID, data.welcomeMessage) : getLang("reseted"));
+				message.reply(data.welcomeMessage ? getLang("edited", data.welcomeMessage) : getLang("reseted"));
 				break;
 			}
 			case "file": {

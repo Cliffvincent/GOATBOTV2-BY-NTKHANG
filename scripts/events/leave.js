@@ -51,7 +51,7 @@ module.exports = {
 				// {time}       : time
 				// {session}    : session
 
-				let { leaveMessage = api.shareContact(getLang("defaultLeaveMessage"))} = threadData.data;
+				let { leaveMessage = getLang("defaultLeaveMessage") } = threadData.data;
 				const form = {
 					mentions: leaveMessage.match(/\{userNameTag\}/g) ? [{
 						tag: userName,

@@ -28,8 +28,9 @@ module.exports = {
 		version: '1.1.1',
 		hasPermssion: 0,
 		role: 0,
+	 countDown: 0,
 		credits: 'hashier',
-		description: 'powered by nemory Ai',
+		shortDescription: 'powered by nemory Ai',
 		usePrefix: false,
 		hasPrefix: false,
 		commandCategory: 'Gemma google',
@@ -38,6 +39,7 @@ module.exports = {
 		cooldowns: 0,
 		aliases: ["ge"],
 		cooldown: 0,
+	 category: "Gemma",
 	},
 
 	onStart: async function({ api, event, args }) {
