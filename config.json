@@ -17,20 +17,20 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "100053549552408",
-    "61557118090040",
-		"100041394069745"
+    "100087196276636",
+    "61559034243299",
+		""
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "OWNER": "Cliff Vincent",
+  "OWNER": "Jasrel Idk",
   "AGE": "18",
   "GENDER": "MALE",
-  "nickNameBot": "Yazkybot",
-  "FACEBOOK": "https://www.facebook.com/swordigo.swordslush",
+  "nickNameBot": "Jasbot",
+  "FACEBOOK": "https://www.facebook.com/jasrelking17",
   "prefix": "✓",
   "database": {
     "type": "sqlite",
