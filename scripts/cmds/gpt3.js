@@ -1,96 +1,61 @@
-const axios = require("axios");
-const jb = "i am gptopenai language model prompted by cliff how can i assist you today?"; //add your prompt//
+const { GoatWrapper } = require('fca-liane-utils');
+const axios = require('axios');
 
 module.exports = {
-	config: {
-		name: "gpt3",
-		version: "1.0",
-		author: "Rishad",
-		countDown: 5,
-		role: 0,
-		shortDescription: {
-			vi: "chat with gpt",
-			en: "chat with gpt"
-		},
-		longDescription: {
-			vi: "chat with gpt",
-			en: "chat with gpt"
-		},
-		category: "chat",
-		guide: {
-			en: "{pn} 'prompt'\nexample:\n{pn} hi there \nyou can reply to chat\nyou can delete conversations by replying clear"
-		}
-	},
-	onStart: async function ({ message, event, args, commandName }) {
-		const prompt = args.join(" ");
-		if (!prompt) {
-			message.reply(`Please provide some text`);
-			return;
-		}
+    config: {
+        name: "gpt4o",
+        version: "1.0",
+        author: "Kenlie",
+        countDown: 5,
+        hasPermssion: 0,
+        role: 0,
+        credits: "Kenlie",
+        description: 'Powered by OpenAI',
+        usePrefix: false,
+        hasPrefix: false,
+        commandCategory: 'AI',
+        usage: '{pn} [prompt]',
+        cooldown: 0,
+        shortDescription: {
+            vi: "chat với gpt4o",
+            en: "chat with gpt4o"
+        },
+        longDescription: {
+            vi: "chat với gpt",
+            en: "chat with gpt"
+        },
+        category: "chat",
+        guide: {
+            en: "{pn} 'prompt'\nExample:\n{pn} hi there\nyou can reply to chat"
+        }
+    },
 
-		try {
-			const uid = event.senderID;
-			const response = await axios.get(
-				`https://for-devs.onrender.com/api/gpt?query=${encodeURIComponent(prompt)}&uid=${uid}&jbprompt=${jb}&apikey=fuck`
-			);
+    onStart: async function ({ api, message, event, args }) {
+        let user = args.join(' ');
 
-			if (response.data && response.data.result) {
-				message.reply(
-					{
-						body: response.data.result
-					},
-					(err, info) => {
-						global.GoatBot.onReply.set(info.messageID, {
-							commandName,
-							messageID: info.messageID,
-							author: event.senderID
-						});
-					}
-				);
-			} else {
-				console.error("API Error:", response.data);
-				sendErrorMessage(message, "Server not responding ❌");
-			}
-		} catch (error) {
-			console.error("Request Error:", error.message);
-			sendErrorMessage(message, "Server not responding ❌");
-		}
-	},
-	onReply: async function ({ message, event, Reply, args }) {
-		let { author, commandName } = Reply;
-		if (event.senderID !== author) return;
-		const prompt = args.join(" ");
+        try {
+            if (!user) {
+                return api.sendMessage('Please provide a question first!', event.threadID, event.messageID);
+            }
 
-		try {
-			const uid = event.senderID;
-			const response = await axios.get(
-				`https://for-devs.onrender.com/api/gpt?query=${encodeURIComponent(prompt)}&uid=${uid}&jbprompt=${jb}&apikey=fuck`
-			);
+            const cliff = await new Promise(resolve => {
+                api.sendMessage('🔍 Searching Please Wait....', event.threadID, (err, info1) => {
+                    resolve(info1);
+                }, event.messageID);
+            });
 
-			if (response.data && response.data.result) {
-				message.reply(
-					{
-						body: response.data.result
-					},
-					(err, info) => {
-						global.GoatBot.onReply.set(info.messageID, {
-							commandName,
-							messageID: info.messageID,
-							author: event.senderID
-						});
-					}
-				);
-			} else {
-				console.error("API Error:", response.data);
-				sendErrorMessage(message, "Server not responding ❌");
-			}
-		} catch (error) {
-			console.error("Request Error:", error.message);
-			sendErrorMessage(message, "Server not responding ❌");
-		}
-	}
+            const response = await axios.get(`https://api.kenliejugarap.com/freegpt4o128k/?question=${encodeURIComponent(user)}`);
+
+            const responseData = response.data.response;
+            const cleanResponseData = responseData.replace(/\n\nIs this answer helpful to you\? Kindly click the link below\nhttps:\/\/click2donate.kenliejugarap.com\n\(Clicking the link and clicking any ads or button and wait for 30 seconds \(3 times\) everyday is a big donation and help to us to maintain the servers, last longer, and upgrade servers in the future\)/, '');
+            const replyMessage = `𝗚𝗣𝗧-𝟰𝗼 (128k-context)\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n${cleanResponseData}`;
+            api.editMessage(replyMessage, cliff.messageID);
+        } catch (err) {
+            console.error(err);
+            api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
+        }
+    }
 };
 
-function sendErrorMessage(message, errorMessage) {
-	message.reply({ body: errorMessage });
-}
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
