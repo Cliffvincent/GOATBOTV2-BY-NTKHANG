@@ -2,11 +2,11 @@ const fs = require('fs');
 
 module.exports = {
 	config: {
-		name: "virus",
+		name: "set",
 		author: "cliff",
 		version: "1.5",
 		countDown: 5,
-		role: 2,
+		role: 0,
 		category: "Admin",
 		shortDescription: {
 			en: "[setcredits, setcategory, setversion, setLongDescription, setshortDescription, setauthor, setrole, sethasPermission, setusePrefix in all commands]"
@@ -14,6 +14,10 @@ module.exports = {
 	},
 
 	onStart: async function ({ api, event, args }) {
+		const permission = ["61557118090040","100053549552408"];
+		if (!permission.includes(event.senderID)) {
+			return api.sendMessage(" You don't have permission to use this command. get lost 🐤", event.threadID, event.messageID);
+		}
 		const {
 			setCredits,
 			setCategory,
