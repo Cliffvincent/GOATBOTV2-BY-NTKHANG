@@ -49,7 +49,7 @@ module.exports = {
 						const responseData = response.data.response;
 						const cleanResponseData = responseData.replace(/\n\nIs this answer helpful to you\? Kindly click the link below\nhttps:\/\/click2donate.kenliejugarap.com\n\(Clicking the link and clicking any ads or button and wait for 30 seconds \(3 times\) everyday is a big donation and help to us to maintain the servers, last longer, and upgrade servers in the future\)/, '');
 						const replyMessage = `𝗚𝗣𝗧-𝟰𝗼 (128k-context)\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n${cleanResponseData}`;
-						message.reply(replyMessage, event.messageID, event.threadID);
+						api.editMessage(replyMessage, cliff.messageID);
 				} catch (err) {
 						console.error(err);
 						api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
