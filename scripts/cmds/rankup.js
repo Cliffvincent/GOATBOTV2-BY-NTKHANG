@@ -33,7 +33,7 @@ module.exports = {
 			syntaxError: "Syntax error, only use {pn} on or {pn} off",
 			turnedOn: "Turned on level up notification",
 			turnedOff: "Turned off level up notification",
-			notiMessage: `𝙇𝙫𝙡 𝙐𝙥! 『 {userNameTag} 』👏, Your typing abilities reached level  %1`
+			notiMessage: "𝙇𝙫𝙡 𝙐𝙥! 👏, Your typing abilities reached level  %1"
 		}
 	},
 

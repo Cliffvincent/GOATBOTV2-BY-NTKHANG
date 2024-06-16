@@ -1,125 +1,62 @@
-function sleep(time) {
-	return new Promise((resolve) => setTimeout(resolve, time));
-}
+const { GoatWrapper } = require('fca-liane-utils');
 
 module.exports = {
-	config: {
-		name: "filteruser",
-		version: "1.6",
-		author: "NTKhang",
-		countDown: 5,
-		role: 1,
-		description: {
-			vi: "lọc thành viên nhóm theo số tin nhắn hoặc bị khóa acc",
-			en: "filter group members by number of messages or locked account"
+		config: {
+				name: "filter",
+				version: "2.0.0",
+				role: 2,
+				credits: "Marjhun Baylon",
+				shortDescription: "Filter Facebook User",
+				hasPrefix: false,
+				usages: "",
+				cooldowns: 5,
+				countDown: 5,
+				category: "removeuser"
 		},
-		category: "box chat",
-		guide: {
-			vi: "   {pn} [<số tin nhắn> | die]",
-			en: "   {pn} [<number of messages> | die]"
-		}
-	},
 
-	langs: {
-		vi: {
-			needAdmin: "⚠️ | Vui lòng thêm bot làm quản trị viên của box để sử dụng lệnh này",
-			confirm: "⚠️ | Bạn có chắc chắn muốn xóa thành viên nhóm có số tin nhắn nhỏ hơn %1 không?\nThả cảm xúc bất kì vào tin nhắn này để xác nhận",
-			kickByBlock: "✅ | Đã xóa thành công %1 thành viên bị khóa acc",
-			kickByMsg: "✅ | Đã xóa thành công %1 thành viên có số tin nhắn nhỏ hơn %2",
-			kickError: "❌ | Đã xảy ra lỗi không thể kick %1 thành viên:\n%2",
-			noBlock: "✅ | Không có thành viên nào bị khóa acc",
-			noMsg: "✅ | Không có thành viên nào có số tin nhắn nhỏ hơn %1"
-		},
-		en: {
-			needAdmin: "⚠️ | Please add the bot as a group admin to use this command",
-			confirm: "⚠️ | Are you sure you want to delete group members with less than %1 messages?\nReact to this message to confirm",
-			kickByBlock: "✅ | Successfully removed %1 members unavailable account",
-			kickByMsg: "✅ | Successfully removed %1 members with less than %2 messages",
-			kickError: "❌ | An error occurred and could not kick %1 members:\n%2",
-			noBlock: "✅ | There are no members who are locked acc",
-			noMsg: "✅ | There are no members with less than %1 messages"
-		}
-	},
+		onStart: async function ({ api, event }) {
+				const { userInfo, adminIDs } = await api.getThreadInfo(event.threadID);
+				let successCount = 0;
+				let failCount = 0;
+				const filteredUsers = [];
 
-	onStart: async function ({ api, args, threadsData, message, event, commandName, getLang }) {
-		const threadData = await threadsData.get(event.threadID);
-		if (!threadData.adminIDs.includes(api.getCurrentUserID()))
-			return message.reply(getLang("needAdmin"));
-
-		if (!isNaN(args[0])) {
-			message.reply(getLang("confirm", args[0]), (err, info) => {
-				global.GoatBot.onReaction.set(info.messageID, {
-					author: event.senderID,
-					messageID: info.messageID,
-					minimum: Number(args[0]),
-					commandName
-				});
-			});
-		}
-		else if (args[0] == "die") {
-			const threadData = await api.getThreadInfo(event.threadID);
-			const membersBlocked = threadData.userInfo.filter(user => user.type !== "User");
-			const errors = [];
-			const success = [];
-			for (const user of membersBlocked) {
-				if (user.type !== "User" && !threadData.adminIDs.some(id => id == user.id)) {
-					try {
-						await api.removeUserFromGroup(user.id, event.threadID);
-						success.push(user.id);
-					}
-					catch (e) {
-						errors.push(user.name);
-					}
-					await sleep(700);
+				for (const user of userInfo) {
+						if (user.gender === undefined) {
+								filteredUsers.push(user.id);
+						}
 				}
-			}
 
-			let msg = "";
-			if (success.length > 0)
-				msg += `${getLang("kickByBlock", success.length)}\n`;
-			if (errors.length > 0)
-				msg += `${getLang("kickError", errors.length, errors.join("\n"))}\n`;
-			if (msg == "")
-				msg += getLang("noBlock");
-			message.reply(msg);
+				const isBotAdmin = adminIDs.map(a => a.id).includes(api.getCurrentUserID());
+
+				if (filteredUsers.length === 0) {
+						api.sendMessage("Your group does not exist 'Facebook User'.", event.threadID);
+				} else {
+						api.sendMessage(`Filtering group of friends ${filteredUsers.length} 'Facebook users'.`, event.threadID, () => {
+								if (isBotAdmin) {
+										api.sendMessage("Starting filtering...\n\n", event.threadID, async () => {
+												for (const userID of filteredUsers) {
+														try {
+																await new Promise(resolve => setTimeout(resolve, 1000));
+																await api.removeUserFromGroup(parseInt(userID), event.threadID);
+																successCount++;
+														} catch (error) {
+																failCount++;
+														}
+												}
+
+												api.sendMessage(`✅ Successfully filtered ${successCount} people.`, event.threadID, () => {
+														if (failCount !== 0) {
+																api.sendMessage(`❌ Failed to filter ${failCount} people.`, event.threadID);
+														}
+												});
+										});
+								} else {
+										api.sendMessage("Bot is not an admin, so it can't filter.", event.threadID);
+								}
+						});
+				}
 		}
-		else
-			message.SyntaxError();
-	},
-
-	onReaction: async function ({ api, Reaction, event, threadsData, message, getLang }) {
-		const { minimum = 1, author } = Reaction;
-		if (event.userID != author)
-			return;
-		const threadData = await threadsData.get(event.threadID);
-		const botID = api.getCurrentUserID();
-		const membersCountLess = threadData.members.filter(member =>
-			member.count < minimum
-			&& member.inGroup == true
-			// ignore bot and admin box
-			&& member.userID != botID
-			&& !threadData.adminIDs.some(id => id == member.userID)
-		);
-		const errors = [];
-		const success = [];
-		for (const member of membersCountLess) {
-			try {
-				await api.removeUserFromGroup(member.userID, event.threadID);
-				success.push(member.userID);
-			}
-			catch (e) {
-				errors.push(member.name);
-			}
-			await sleep(700);
-		}
-
-		let msg = "";
-		if (success.length > 0)
-			msg += `${getLang("kickByMsg", success.length, minimum)}\n`;
-		if (errors.length > 0)
-			msg += `${getLang("kickError", errors.length, errors.join("\n"))}\n`;
-		if (msg == "")
-			msg += getLang("noMsg", minimum);
-		message.reply(msg);
-	}
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
